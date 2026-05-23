@@ -1,0 +1,854 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Доставка еды — Готовим как дома</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    color: #2A1F1B;
+    background: #FFF8F0;
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255, 248, 240, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(198, 93, 59, 0.18);
+  }
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand {
+    font-weight: 800;
+    font-size: 20px;
+    color: #C65D3B;
+    letter-spacing: -0.02em;
+  }
+  .navbtns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .container {
+    width: min(1200px, 100% - 32px);
+    margin: 0 auto;
+  }
+
+  .btn {
+    border: 0;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    background: #C65D3B;
+    color: #fff;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    box-shadow: 0 8px 22px rgba(198, 93, 59, 0.22);
+  }
+  .btn:hover { transform: translateY(-1px); background: #A94A2B; }
+  .btn:active { transform: translateY(0); }
+  .btn:disabled {
+    background: #B9B0A8;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .btn.secondary {
+    background: #FFF8F0;
+    color: #C65D3B;
+    border: 1px solid rgba(198, 93, 59, 0.35);
+    box-shadow: 0 6px 16px rgba(42, 31, 27, 0.08);
+  }
+  .btn.secondary:hover { background: #FFF0E2; }
+
+  .hero {
+    min-height: 100vh;
+    padding: 96px 0 56px;
+    background: linear-gradient(135deg, #FFF8F0 0%, #C65D3B 100%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 40px;
+    align-items: center;
+    min-height: 70vh;
+  }
+  .hero kbd { font-family: Arial, sans-serif; }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    color: #7A2E18;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.65);
+    padding: 10px 14px;
+    border-radius: 999px;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #fff;
+  }
+  .status.open { background: #2F9E5C; }
+  .status.closed { background: #8C8A87; }
+
+  h1 {
+    margin: 0 0 18px;
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+  .hero p {
+    margin: 0 0 28px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #4E3026;
+  }
+  .hero-plate {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .big-plate {
+    aspect-ratio: 1/1;
+    border-radius: 28px;
+    display: grid;
+    place-items: center;
+    font-size: 72px;
+    box-shadow: 0 24px 60px rgba(122, 46, 24, 0.22);
+    background: linear-gradient(135deg, #FFD8A8, #FFB085);
+  }
+  .big-plate:nth-child(2) { background: linear-gradient(135deg, #D8F5A2, #B2F2BB); font-size: 64px; }
+  .big-plate:nth-child(3) { background: linear-gradient(135deg, #FFE8A0, #FFD8A8); font-size: 68px; }
+  .big-plate:nth-child(4) { background: linear-gradient(135deg, #F3D9FA, #FFB5A7); font-size: 58px; }
+
+  .steps {
+    margin-top: 44px;
+    padding: 22px;
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 22px;
+  }
+  .steps-title {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #5A2414;
+  }
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .step {
+    background: rgba(255,255,255,0.65);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .step-emoji { font-size: 32px; line-height: 1; margin-bottom: 8px; }
+
+  .menu-screen-inner { padding: 96px 0 40px; }
+  .menu-screen-inner h2 { margin: 0 0 18px; font-size: 34px; }
+
+  .menu-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .search-wrap { position: relative; margin-bottom: 14px; }
+  .search {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(198, 93, 59, 0.25);
+    background: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 8px 22px rgba(42,31,27,0.06);
+  }
+  .search:focus { border-color: #C65D3B; }
+  .autocomplete {
+    position: absolute;
+    left: 0; right: 0; top: calc(100% + 6px);
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(42,31,27,0.18);
+    overflow: hidden;
+    z-index: 20;
+    display: none;
+  }
+  .autocomplete.active { display: block; }
+  .suggestion {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: #fff;
+    padding: 12px 16px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #F2E9DF;
+  }
+  .suggestion:hover { background: #FFF8F0; }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .chip {
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 12px;
+    background: #fff;
+    color: #5A4B43;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(42,31,27,0.07);
+  }
+  .chip.active { background: #C65D3B; color: #fff; }
+
+  .category { margin-bottom: 28px; }
+  .category h3 {
+    margin: 0 0 14px;
+    font-size: 22px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .dish {
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(42,31,27,0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .dish:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(42,31,27,0.16); }
+  .dish-plate {
+    height: 130px;
+    display: grid;
+    place-items: center;
+    font-size: 64px;
+  }
+  .dish-body { padding: 14px 16px 16px; display: grid; gap: 8px; flex: 1; }
+  .dish-name { font-weight: 800; font-size: 17px; }
+  .dish-comp { color: #6B6B6B; font-size: 13px; line-height: 1.45; }
+  .dish-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .price { color: #B7791F; font-weight: 900; font-size: 18px; }
+  .add-btn { white-space: nowrap; padding: 9px 11px; font-size: 14px; border-radius: 12px; }
+
+  .cart {
+    background: #FFF8F0;
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 14px 35px rgba(42,31,27,0.12);
+    position: sticky;
+    top: 86px;
+    align-self: start;
+  }
+  .cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .cart-title { margin: 0; font-size: 20px; }
+  .cart-toggle {
+    display: none;
+    border: 0;
+    background: #C65D3B;
+    color: #fff;
+    border-radius: 12px;
+    padding: 8px 10px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+  }
+  .cart-empty {
+    color: #8C8A87;
+    padding: 18px 0;
+    text-align: center;
+  }
+  .cline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(198, 93, 59, 0.14);
+  }
+  .cline-info { min-width: 0; }
+  .cline-name { font-weight: 700; }
+  .cline-qty { color: #8C8A87; font-size: 13px; }
+  .cline-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .remove {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    border: 0;
+    background: #F2E9DF;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+  }
+  .ctotal {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 14px 0 12px;
+  }
+
+  .checkout-screen-inner { padding: 96px 0 60px; }
+  .checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: start;
+  }
+  .backbar { margin-bottom: 14px; }
+  .panel {
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: 0 14px 35px rgba(42,31,27,0.10);
+  }
+  .panel h2 { margin: 0 0 14px; }
+  .order-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F2E9DF;
+  }
+  .order-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .field label { font-weight: 700; font-size: 14px; }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 14px;
+    border: 1px solid #E6D7C8;
+    background: #FFF8F0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    outline: none;
+  }
+  .field input:focus,
+  .field textarea:focus { border-color: #C65D3B; }
+  .field textarea { min-height: 90px; resize: vertical; }
+  .required { color: #C65D3B; }
+
+  .success-box {
+    background: #fff;
+    border-radius: 24px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(42,31,27,0.14);
+  }
+  .success-box .emoji { font-size: 72px; line-height: 1; margin-bottom: 10px; }
+  .success-box h3 { margin: 0 0 8px; font-size: 26px; }
+  .success-box p { margin: 0 0 18px; color: #5A4B43; }
+
+  @media (max-width: 980px) {
+    .hero-grid,
+    .menu-layout,
+    .checkout-grid,
+    .steps-row { grid-template-columns: 1fr; }
+    .hero { padding-top: 140px; }
+    .menu-screen-inner,
+    .checkout-screen-inner { padding-top: 110px; }
+    .hero-plate { max-width: 420px; margin: 0 auto; }
+    .cart {
+      position: static;
+      margin-top: 10px;
+      padding: 14px;
+    }
+    .cart-body { display: none; }
+    .cart-body.open { display: block; }
+    .cart-toggle { display: inline-block; }
+    .topbar-inner { flex-direction: column; align-items: stretch; }
+    .navbtns { justify-content: center; }
+  }
+
+  @media (max-width: 520px) {
+    .cards { grid-template-columns: 1fr; }
+    .hero p { font-size: 16px; }
+    .step { padding: 12px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"> </div>
+    <div class="navbtns">
+      <button class="btn secondary" type="button" onclick="showScreen('screen-home')">🏠 Главная</button>
+      <button class="btn secondary" type="button" onclick="showScreen('screen-menu')">📖 Меню</button>
+      <button class="btn" type="button" onclick="showScreen('screen-menu')">🧺 Корзина</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="screen-home" class="screen active">
+    <div class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span id="greeting">Добрый день</span>
+            <span id="workStatus" class="status open">✅ Открыты</span>
+          </div>
+          <h1>Готовим как дома — доставляем к вашему порогу</h1>
+          <p>Домашняя еда с доставкой по указанному адресу. Вы голодны — мы уже едем.</p>
+          <button class="btn" type="button" onclick="showScreen('screen-menu')">🍽 Смотреть меню</button>
+
+          <div class="steps">
+            <div class="steps-title">Как мы работаем</div>
+            <div class="steps-row">
+              <div class="step">
+                <div class="step-emoji">🍽️</div>
+                Выбираете
+              </div>
+              <div class="step">
+                <div class="step-emoji">📍</div>
+                Указываете адрес
+              </div>
+              <div class="step">
+                <div class="step-emoji">🛵</div>
+                Встречаете курьера
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-plate" aria-hidden="true">
+          <div class="big-plate">🥞</div>
+          <div class="big-plate">🥗</div>
+          <div class="big-plate">🍜</div>
+          <div class="big-plate">🍰</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-menu" class="screen">
+    <div class="container menu-screen-inner">
+      <h2>Меню</h2>
+      <div class="menu-layout">
+        <div class="menu-main">
+          <div class="search-wrap">
+            <input id="searchInput" class="search" type="text" placeholder="🔍 Найти блюдо..." autocomplete="off">
+            <div id="autocomplete" class="autocomplete"></div>
+          </div>
+
+          <div id="categoryChips" class="chips"></div>
+          <div id="menuGrid"></div>
+        </div>
+
+        <aside class="cart">
+          <div class="cart-header">
+            <h3 class="cart-title">🧺 Корзина</h3>
+            <button class="cart-toggle" type="button" onclick="toggleMobileCart()">Развернуть</button>
+          </div>
+          <div id="cartBody" class="cart-body">
+            <div id="cartItems">
+              <div class="cart-empty">Корзина пуста</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-checkout" class="screen">
+    <div class="container checkout-screen-inner">
+      <div class="backbar">
+        <button class="btn secondary" type="button" onclick="showScreen('screen-menu')">← Назад в меню</button>
+      </div>
+
+      <div class="checkout-grid">
+        <div>
+          <div class="panel">
+            <h2>Оформление заказа</h2>
+            <div id="orderList"></div>
+            <div class="order-total">
+              <span>Итого</span>
+              <span id="orderTotal">0₽</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel checkout-form">
+            <!-- Замените ВАШ_УНИКАЛЬНЫЙ_ID на ID из Formspree -->
+            <form id="orderForm" action="https://formspree.io/f/https://formspree.io/f/mqejllyo" method="POST">
+              <input type="hidden" name="order_items" id="orderItemsField">
+              <input type="hidden" name="order_total" id="orderTotalField">
+
+              <div class="field">
+                <label for="name">Ваше имя <span class="required">*</span></label>
+                <input id="name" name="name" type="text" required placeholder="Анна">
+              </div>
+
+              <div class="field">
+                <label for="phone">Телефон <span class="required">*</span></label>
+                <input id="phone" name="phone" type="tel" required placeholder="+7 (999) 000-00-00">
+              </div>
+
+              <div class="field">
+                <label for="address">Адрес доставки <span class="required">*</span></label>
+                <input id="address" name="address" type="text" required placeholder="Улица, дом, квартира, подъезд">
+              </div>
+
+              <div class="field">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" name="comment" placeholder="Код домофона, пожелания, аллергии"></textarea>
+              </div>
+
+              <button id="submitOrderBtn" class="btn" type="submit">✅ Отправить заказ</button>
+            </form>
+          </div>
+
+          <div id="orderSuccess" class="success-box" hidden>
+            <div class="emoji">✅</div>
+            <h3>Заказ принят!</h3>
+            <p>Мы свяжемся с вами.</p>
+            <button class="btn" type="button" onclick="showScreen('screen-menu')">Вернуться в меню</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const menu = [
+    {
+      category: "🍳 Завтраки",
+      items: [
+        { id: "syrniki", name: "Сырники", price: 290, emoji: "🥞", color: "linear-gradient(135deg,#FFD8A8,#FFB085)", comp: "творог, яйцо, сметана, ягодный соус" },
+        { id: "omlet", name: "Омлет", price: 250, emoji: "🍳", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "яйца, молоко, сливочное масло, зелень" },
+        { id: "kasha", name: "Каша овсяная", price: 220, emoji: "🥣", color: "linear-gradient(135deg,#F3D9FA,#FFD8A8)", comp: "овсянка, молоко, мёд, яблоко" },
+        { id: "avotoast", name: "Тосты с авокадо", price: 310, emoji: "🥑", color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)", comp: "авокадо, яйцо пашот, семена льна, лимон" },
+        { id: "pancakes", name: "Панкейки", price: 280, emoji: "🥞", color: "linear-gradient(135deg,#FFE8A0,#FFC078)", comp: "пшеничная мука, молоко, кленовый сироп, масло" }
+      ]
+    },
+    {
+      category: "🥗 Салаты",
+      items: [
+        { id: "caesar", name: "Цезарь", price: 350, emoji: "🥗", color: "linear-gradient(135deg,#D8F5A2,#FFF8F0)", comp: "курица, пармезан, айсберг, соус цезарь, гренки" },
+        { id: "greek", name: "Греческий", price: 320, emoji: "🥗", color: "linear-gradient(135deg,#B2F2BB,#D8F5A2)", comp: "томаты, огурцы, перец, фета, маслины, оливковое масло" },
+        { id: "warmsalad", name: "Тёплый с говядиной", price: 380, emoji: "🥩", color: "linear-gradient(135deg,#FFB5A7,#FFC078)", comp: "говядина, шпинат, картофель, горчичная заправка" }
+      ]
+    },
+    {
+      category: "🍲 Супы",
+      items: [
+        { id: "borscht", name: "Борщ", price: 290, emoji: "🍲", color: "linear-gradient(135deg,#FFB5A7,#C65D3B)", comp: "свёкла, говядина, капуста, сметана, зелень" },
+        { id: "chicken Soup", name: "Куриный", price: 250, emoji: "🍜", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "курица, вермишель, морковь, зелень" },
+        { id: "pumpkin", name: "Тыквенный", price: 280, emoji: "🎃", color: "linear-gradient(135deg,#FFC078,#FFE8A0)", comp: "тыква, сливки, семечки, пряности" },
+        { id: "solyanka", name: "Солянка", price: 340, emoji: "🍲", color: "linear-gradient(135deg,#C65D3B,#FFB5A7)", comp: "колбасы, огурцы, лимон, сметана, зелень" }
+      ]
+    },
+    {
+      category: "🍝 Горячее",
+      items: [
+        { id: "carbonara", name: "Паста карбонара", price: 390, emoji: "🍝", color: "linear-gradient(135deg,#FFE8A0,#F3D9FA)", comp: "спагетти, бекон, яйцо, пармезан, чёрный перец" },
+        { id: "chickenpuree", name: "Куриное филе с пюре", price: 420, emoji: "🍗", color: "linear-gradient(135deg,#FFD8A8,#FFB5A7)", comp: "курица, картофельное пюре, сливочный соус" },
+        { id: "salmon", name: "Лосось на гриле", price: 590, emoji: "🐟", color: "linear-gradient(135deg,#BEE3F8,#D8F5A2)", comp: "лосось, лимон, спаржа, оливковое масло" },
+        { id: "turkey", name: "Котлеты из индейки", price: 370, emoji: "🍖", color: "linear-gradient(135deg,#FFD8A8,#FFC078)", comp: "индейка, кабачок, лук, сливочный соус" },
+        { id: "plov", name: "Плов", price: 380, emoji: "🍚", color: "linear-gradient(135deg,#FFC078,#FFE8A0)", comp: "баранина, рис, морковь, зира, барбарис" },
+        { id: "potato", name: "Картошка по-деревенски", price: 220, emoji: "🥔", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "картофель, чеснок, розмарин, паприка" },
+        { id: "fries", name: "Картошка во фритюре", price: 200, emoji: "🍟", color: "linear-gradient(135deg,#FFD8A8,#FFC078)", comp: "молодой картофель, соль, паприка, соус на выбор" }
+      ]
+    },
+    {
+      category: "🍰 Десерты",
+      items: [
+        { id: "cheesecake", name: "Чизкейк", price: 280, emoji: "🍰", color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)", comp: "сливочный сыр, песочная основа, ягодное кули" },
+        { id: "fondant", name: "Фондан", price: 320, emoji: "🍫", color: "linear-gradient(135deg,#C65D3B,#FFB5A7)", comp: "тёмный шоколад, сливочное масло, ваниль, мороженое" },
+        { id: "tiramisu", name: "Тирамису", price: 340, emoji: "🍮", color: "linear-gradient(135deg,#FFD8A8,#F3D9FA)", comp: "маскарпоне, кофе, савоярди, какао" },
+        { id: "strudel", name: "Штрудель", price: 260, emoji: "🥧", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "яблоки, изюм, корица, слоёное тесто, орехи" }
+      ]
+    },
+    {
+      category: "🥤 Напитки",
+      items: [
+        { id: "coffee", name: "Кофе", price: 150, emoji: "☕", color: "linear-gradient(135deg,#D8C0A8,#C65D3B)", comp: "арабика, молоко на выбор" },
+        { id: "tea", name: "Чай", price: 120, emoji: "🍵", color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)", comp: "чёрный/зелёный, мята, лимон, мёд" },
+        { id: "lemonade", name: "Лимонад", price: 180, emoji: "🍋", color: "linear-gradient(135deg,#FFE8A0,#D8F5A2)", comp: "лимон, мята, имбирь, газированная вода" },
+        { id: "smoothie", name: "Смузи", price: 250, emoji: "🥤", color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)", comp: "банан, ягоды, йогурт, мёд" }
+      ]
+    }
+  ];
+
+  let cart = [];
+  let activeCategory = "Все";
+  let currentQuery = "";
+
+  function setGreetingAndStatus() {
+    const h = new Date().getHours();
+    let greeting = "Доброй ночи";
+    if (h >= 5 && h < 12) greeting = "Доброе утро";
+    else if (h < 17) greeting = "Добрый день";
+    else if (h < 22) greeting = "Добрый вечер";
+
+    const open = h >= 8 && h < 20;
+    document.getElementById("greeting").textContent = greeting;
+    const st = document.getElementById("workStatus");
+    st.className = "status " + (open ? "open" : "closed");
+    st.textContent = open ? "✅ Открыты" : "🌙 Закрыты";
+  }
+
+  function money(n) { return n.toLocaleString("ru-RU") + "₽"; }
+
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    window.scrollTo({ top: 0, behavior: "instant" });
+    if (id === "screen-menu") renderMenu();
+    if (id === "screen-checkout") renderCheckout();
+  }
+
+  function renderChips() {
+    const box = document.getElementById("categoryChips");
+    const all = ["Все", ...menu.map(m => m.category)];
+    box.innerHTML = all.map(cat => `
+      <button class="chip ${cat === activeCategory ? "active" : ""}" type="button" data-cat="${cat}">${cat}</button>
+    `).join("");
+    box.querySelectorAll(".chip").forEach(btn => {
+      btn.onclick = () => { activeCategory = btn.dataset.cat; renderMenu(); };
+    });
+  }
+
+  function itemCard(it) {
+    return `
+      <article class="dish">
+        <div class="dish-plate" style="background:${it.color}" aria-hidden="true">${it.emoji}</div>
+        <div class="dish-body">
+          <div class="dish-name">${it.name}</div>
+          <div class="dish-comp">${it.comp}</div>
+          <div class="dish-row">
+            <div class="price">${money(it.price)}</div>
+            <button class="btn add-btn" type="button" data-id="${it.id}">➕ В корзину</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function matches(it, q) {
+    if (!q) return true;
+    const s = q.toLowerCase();
+    return it.name.toLowerCase().includes(s) || it.comp.toLowerCase().includes(s);
+  }
+
+  function renderMenu() {
+    renderChips();
+    const q = currentQuery.trim();
+    const grid = document.getElementById("menuGrid");
+    let html = "";
+    for (const cat of menu) {
+      if (activeCategory !== "Все" && activeCategory !== cat.category) continue;
+      const items = cat.items.filter(it => matches(it, q));
+      if (!items.length) continue;
+      html += `<div class="category"><h3>${cat.category}</h3><div class="cards">${items.map(itemCard).join("")}</div></div>`;
+    }
+    if (!html) html = `<p>Ничего не нашлось. Попробуйте другой запрос.</p>`;
+    grid.innerHTML = html;
+  }
+
+  function renderSuggestions() {
+    const box = document.getElementById("autocomplete");
+    const q = currentQuery.trim();
+    if (!q) { box.classList.remove("active"); box.innerHTML = ""; return; }
+    const s = q.toLowerCase();
+    const names = menu.flatMap(c => c.items)
+      .filter(it => it.name.toLowerCase().includes(s))
+      .map(it => it.name)
+      .slice(0, 6);
+    if (!names.length) { box.classList.remove("active"); box.innerHTML = ""; return; }
+    box.innerHTML = names.map(n => `<button class="suggestion" type="button">${n}</button>`).join("");
+    box.classList.add("active");
+    box.querySelectorAll(".suggestion").forEach(btn => {
+      btn.onclick = () => {
+        document.getElementById("searchInput").value = btn.textContent;
+        currentQuery = btn.textContent;
+        renderMenu();
+        box.classList.remove("active");
+      };
+    });
+  }
+
+  function total() {
+    return cart.reduce((sum, it) => sum + it.price * it.qty, 0);
+  }
+
+  function renderCart() {
+    const box = document.getElementById("cartItems");
+    if (!cart.length) {
+      box.innerHTML = `<div class="cart-empty">Корзина пуста</div>`;
+      return;
+    }
+    let html = "";
+    for (const it of cart) {
+      html += `
+        <div class="cline">
+          <div class="cline-info">
+            <div class="cline-name">${it.name}</div>
+            <div class="cline-qty">${it.qty} × ${money(it.price)}</div>
+          </div>
+          <div class="cline-right">
+            <div class="price">${money(it.price * it.qty)}</div>
+            <button class="remove" type="button" data-id="${it.id}" aria-label="Удалить">✖</button>
+          </div>
+        </div>
+      `;
+    }
+    html += `
+      <div class="ctotal"><span>Итого</span><span>${money(total())}</span></div>
+      <button id="goCheckout" class="btn" type="button" style="width:100%">📝 Оформить заказ</button>
+    `;
+    box.innerHTML = html;
+    document.getElementById("goCheckout").onclick = () => showScreen("screen-checkout");
+  }
+
+  document.getElementById("menuGrid").addEventListener("click", e => {
+    const btn = e.target.closest(".add-btn");
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const item = menu.flatMap(c => c.items).find(it => it.id === id);
+    if (!item) return;
+    const line = cart.find(c => c.id === id);
+    if (line) line.qty++; else cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+    renderCart();
+    const body = document.getElementById("cartBody");
+    if (window.innerWidth <= 980) body.classList.add("open");
+  });
+
+  document.getElementById("cartItems").addEventListener("click", e => {
+    const btn = e.target.closest(".remove");
+    if (!btn) return;
+    cart = cart.filter(c => c.id !== btn.dataset.id);
+    renderCart();
+  });
+
+  function toggleMobileCart() {
+    document.getElementById("cartBody").classList.toggle("open");
+  }
+
+  function renderCheckout() {
+    const list = document.getElementById("orderList");
+    if (!cart.length) { list.innerHTML = `<div style="color:#8C8A87">Корзина пуста</div>`; }
+    else {
+      list.innerHTML = cart.map(it => `
+        <div class="order-line">
+          <span>${it.qty} × ${it.name}</span>
+          <span>${money(it.price * it.qty)}</span>
+        </div>
+      `).join("");
+    }
+    document.getElementById("orderTotal").textContent = money(total());
+    document.getElementById("submitOrderBtn").disabled = !cart.length;
+    document.querySelector(".checkout-form").hidden = false;
+    document.getElementById("orderSuccess").hidden = true;
+  }
+
+  document.getElementById("searchInput").addEventListener("input", e => {
+    currentQuery = e.target.value;
+    renderSuggestions();
+    renderMenu();
+  });
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".search-wrap")) document.getElementById("autocomplete").classList.remove("active");
+  });
+
+  document.getElementById("orderForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!cart.length) return;
+    document.getElementById("orderItemsField").value = cart.map(it => `${it.qty}× ${it.name} — ${money(it.price * it.qty)}`).join("\n");
+    document.getElementById("orderTotalField").value = money(total());
+
+    try {
+      await fetch(e.target.action, {
+        method: "POST",
+        body: new FormData(e.target),
+        headers: { Accept: "application/json" }
+      });
+    } catch (_) {}
+
+    cart = [];
+    renderCart();
+    document.querySelector(".checkout-form").hidden = true;
+    document.getElementById("orderSuccess").hidden = false;
+  });
+
+  setGreetingAndStatus();
+  renderMenu();
+  renderCart();
+</script>
+
+</body>
+</html>
+```
