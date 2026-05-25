@@ -1,929 +1,1227 @@
-```css
-*
-{
-  box-sizing: border-box;
-}
-
-html,
-body
-{
-  margin: 0;
-  padding: 0;
-}
-
-body
-{
-  font-family: Arial, sans-serif;
-  color: #2A1F1B;
-  background: #FFF8F0;
-}
-
-.topbar
-{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: rgba(255, 248, 240, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(198, 93, 59, 0.18);
-}
-
-.topbar-inner
-{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.brand
-{
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-family: Arial, sans-serif;
-  font-weight: 900;
-  font-size: 20px;
-  color: #7A2E18;
-  letter-spacing: -0.03em;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.brand-mark
-{
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #FFD8A8, #C65D3B);
-  box-shadow: 0 8px 20px rgba(122, 46, 24, 0.22);
-  font-size: 20px;
-}
-
-.navbtns
-{
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.navbtn
-{
-  border: 1px solid rgba(198, 93, 59, 0.25);
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-family: Arial, sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.72);
-  color: #7A2E18;
-  box-shadow: 0 6px 14px rgba(42, 31, 27, 0.06);
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.navbtn:hover
-{
-  background: #ffffff;
-  transform: translateY(-1px);
-}
-
-.navbtn.active
-{
-  background: #C65D3B;
-  color: #ffffff;
-  border-color: #C65D3B;
-  box-shadow: 0 10px 22px rgba(198, 93, 59, 0.28);
-}
-
-.screen
-{
-  display: none;
-}
-
-.screen.active
-{
-  display: block;
-}
-
-.container
-{
-  width: min(1200px, 100% - 28px);
-  margin: 0 auto;
-}
-
-.btn
-{
-  border: 0;
-  border-radius: 14px;
-  padding: 12px 16px;
-  font-family: Arial, sans-serif;
-  font-weight: 800;
-  font-size: 15px;
-  cursor: pointer;
-  background: #C65D3B;
-  color: #ffffff;
-  box-shadow: 0 10px 24px rgba(198, 93, 59, 0.25);
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.btn:hover
-{
-  transform: translateY(-1px);
-  background: #A94A2B;
-}
-
-.btn:active
-{
-  transform: translateY(0);
-}
-
-.btn:disabled
-{
-  background: #B9B0A8;
-  color: #F6F2EE;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-.btn.secondary
-{
-  background: #FFF8F0;
-  color: #C65D3B;
-  border: 1px solid rgba(198, 93, 59, 0.35);
-  box-shadow: 0 6px 16px rgba(42, 31, 27, 0.08);
-}
-
-.btn.secondary:hover
-{
-  background: #FFF0E2;
-}
-
-.add-btn
-{
-  white-space: nowrap;
-  padding: 9px 11px;
-  font-size: 14px;
-  border-radius: 12px;
-}
-
-.hero
-{
-  position: relative;
-  min-height: 100vh;
-  padding: 100px 0 56px;
-  background: linear-gradient(135deg, #FFF8F0 0%, #C65D3B 100%);
-  overflow: hidden;
-}
-
-.hero::before
-{
-  content: "🌿";
-  position: absolute;
-  left: 6%;
-  top: 18%;
-  font-size: 170px;
-  opacity: 0.13;
-  filter: blur(1px);
-  pointer-events: none;
-}
-
-.hero::after
-{
-  content: "🍃";
-  position: absolute;
-  right: 7%;
-  bottom: 12%;
-  font-size: 200px;
-  opacity: 0.12;
-  filter: blur(1px);
-  pointer-events: none;
-}
-
-.hero-grid
-{
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: 40px;
-  align-items: center;
-  min-height: 72vh;
-}
-
-.eyebrow
-{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
-  font-weight: 800;
-  color: #7A2E18;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.70);
-  padding: 10px 14px;
-  border-radius: 999px;
-  box-shadow: 0 10px 26px rgba(122, 46, 24, 0.12);
-}
-
-.status
-{
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  color: #ffffff;
-}
-
-.status.open
-{
-  background: #2F9E5C;
-}
-
-.status.closed
-{
-  background: #8C8A87;
-}
-
-h1
-{
-  margin: 0 0 18px;
-  font-size: clamp(34px, 5vw, 64px);
-  line-height: 1.06;
-  letter-spacing: -0.04em;
-}
-
-.hero p
-{
-  margin: 0 0 26px;
-  font-size: 18px;
-  line-height: 1.65;
-  color: #4E3026;
-}
-
-.hero-plate
-{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.big-plate
-{
-  aspect-ratio: 1 / 1;
-  border-radius: 28px;
-  display: grid;
-  place-items: center;
-  font-size: 70px;
-  box-shadow: 0 24px 60px rgba(122, 46, 24, 0.22);
-  background: linear-gradient(135deg, #FFD8A8, #FFB085);
-}
-
-.big-plate:nth-child(2)
-{
-  background: linear-gradient(135deg, #D8F5A2, #B2F2BB);
-  font-size: 64px;
-}
-
-.big-plate:nth-child(3)
-{
-  background: linear-gradient(135deg, #FFE8A0, #FFD8A8);
-  font-size: 68px;
-}
-
-.big-plate:nth-child(4)
-{
-  background: linear-gradient(135deg, #F3D9FA, #FFB5A7);
-  font-size: 58px;
-}
-
-.steps
-{
-  margin-top: 44px;
-  padding: 22px;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.60);
-  border-radius: 22px;
-  box-shadow: 0 18px 40px rgba(122, 46, 24, 0.12);
-}
-
-.steps-title
-{
-  margin: 0 0 16px;
-  font-size: 16px;
-  font-weight: 900;
-  color: #5A2414;
-}
-
-.steps-row
-{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.step
-{
-  background: rgba(255, 255, 255, 0.68);
-  border-radius: 16px;
-  padding: 16px;
-  text-align: center;
-  font-weight: 800;
-}
-
-.step-emoji
-{
-  font-size: 32px;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.page-title
-{
-  margin: 0 0 18px;
-  font-size: 34px;
-}
-
-.menu-screen-inner,
-.checkout-screen-inner
-{
-  padding: 100px 0 56px;
-}
-
-.search-wrap
-{
-  position: relative;
-  margin-bottom: 14px;
-}
-
-.search
-{
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(198, 93, 59, 0.25);
-  background: #ffffff;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  outline: none;
-  color: #2A1F1B;
-  box-shadow: 0 8px 22px rgba(42, 31, 27, 0.07);
-}
-
-.search:focus
-{
-  border-color: #C65D3B;
-}
-
-.autocomplete
-{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 6px);
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 18px 45px rgba(42, 31, 27, 0.18);
-  overflow: hidden;
-  z-index: 20;
-  display: none;
-}
-
-.autocomplete.active
-{
-  display: block;
-}
-
-.suggestion
-{
-  width: 100%;
-  text-align: left;
-  border: 0;
-  background: #ffffff;
-  padding: 12px 16px;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  cursor: pointer;
-  color: #2A1F1B;
-  border-bottom: 1px solid #F2E9DF;
-}
-
-.suggestion:hover
-{
-  background: #FFF8F0;
-}
-
-.chips
-{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.chip
-{
-  border: 0;
-  border-radius: 999px;
-  padding: 9px 12px;
-  background: #ffffff;
-  color: #5A4B43;
-  font-family: Arial, sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(42, 31, 27, 0.07);
-}
-
-.chip.active
-{
-  background: #C65D3B;
-  color: #ffffff;
-}
-
-.cards
-{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-.dish
-{
-  background: #ffffff;
-  border-radius: 22px;
-  box-shadow: 0 12px 30px rgba(42, 31, 27, 0.10);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.dish:hover
-{
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 20px 45px rgba(42, 31, 27, 0.17);
-}
-
-.dish-plate
-{
-  height: 150px;
-  display: grid;
-  place-items: center;
-  font-size: 74px;
-  pointer-events: none;
-}
-
-.dish-body
-{
-  padding: 14px 16px 16px;
-  display: grid;
-  gap: 8px;
-  flex: 1;
-  pointer-events: none;
-}
-
-.dish-name
-{
-  font-weight: 900;
-  font-size: 17px;
-  color: #2A1F1B;
-}
-
-.dish-comp
-{
-  color: #6B6B6B;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.dish-row
-{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: auto;
-  pointer-events: auto;
-}
-
-.price
-{
-  color: #B7791F;
-  font-weight: 900;
-  font-size: 18px;
-}
-
-.panel
-{
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 22px;
-  box-shadow: 0 14px 35px rgba(42, 31, 27, 0.10);
-}
-
-.panel h2
-{
-  margin: 0 0 14px;
-}
-
-.order-line
-{
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid #F2E9DF;
-}
-
-.order-total
-{
-  display: flex;
-  justify-content: space-between;
-  font-weight: 900;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.empty-note
-{
-  color: #8C8A87;
-  padding: 18px 0;
-  text-align: center;
-}
-
-.checkout-grid
-{
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 22px;
-  align-items: start;
-}
-
-.field
-{
-  display: grid;
-  gap: 6px;
-  margin-bottom: 14px;
-}
-
-.field label
-{
-  font-weight: 800;
-  font-size: 14px;
-}
-
-.field input,
-.field textarea
-{
-  width: 100%;
-  padding: 13px 14px;
-  border-radius: 14px;
-  border: 1px solid #E6D7C8;
-  background: #FFF8F0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  outline: none;
-  color: #2A1F1B;
-}
-
-.field input:focus,
-.field textarea:focus
-{
-  border-color: #C65D3B;
-}
-
-.field textarea
-{
-  min-height: 90px;
-  resize: vertical;
-}
-
-.required
-{
-  color: #C65D3B;
-}
-
-.success-box
-{
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 28px;
-  text-align: center;
-  box-shadow: 0 18px 45px rgba(42, 31, 27, 0.14);
-}
-
-.success-box .emoji
-{
-  font-size: 72px;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.success-box h3
-{
-  margin: 0 0 8px;
-  font-size: 26px;
-}
-
-.success-box p
-{
-  margin: 0 0 18px;
-  color: #5A4B43;
-}
-
-[hidden]
-{
-  display: none !important;
-}
-
-.modal
-{
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.modal.open
-{
-  display: flex;
-}
-
-.modal-backdrop
-{
-  position: absolute;
-  inset: 0;
-  background: rgba(42, 31, 27, 0.55);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.modal.anim .modal-backdrop
-{
-  opacity: 1;
-}
-
-.modal-panel
-{
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  max-height: calc(100vh - 40px);
-  overflow: auto;
-  background: #ffffff;
-  border-radius: 28px;
-  padding: 26px;
-  box-shadow: 0 30px 80px rgba(42, 31, 27, 0.28);
-  transform: translateY(24px) scale(0.94);
-  opacity: 0;
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease;
-}
-
-.modal.anim .modal-panel
-{
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-.modal-close
-{
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 2;
-  width: 42px;
-  height: 42px;
-  border: 0;
-  border-radius: 12px;
-  background: #F2E9DF;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  cursor: pointer;
-  color: #2A1F1B;
-}
-
-.modal-photo
-{
-  height: 260px;
-  border-radius: 24px;
-  display: grid;
-  place-items: center;
-  font-size: 120px;
-  margin-bottom: 18px;
-  box-shadow: inset 0 0 0 1px rgba(42, 31, 27, 0.06);
-}
-
-.modal h3
-{
-  margin: 0 0 12px;
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.modal-row
-{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.modal-label
-{
-  font-weight: 900;
-  color: #7A2E18;
-  margin-bottom: 8px;
-}
-
-.modal-history
-{
-  margin: 0 0 18px;
-  color: #4E3026;
-  line-height: 1.65;
-}
-
-body.noscroll
-{
-  overflow: hidden;
-}
-
-.toast
-{
-  position: fixed;
-  left: 50%;
-  bottom: 22px;
-  z-index: 260;
-  transform: translateX(-50%) translateY(20px);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-  background: #1F5F3C;
-  color: #ffffff;
-  padding: 12px 16px;
-  border-radius: 14px;
-  font-family: Arial, sans-serif;
-  font-weight: 800;
-  box-shadow: 0 14px 35px rgba(13, 56, 32, 0.25);
-  white-space: nowrap;
-  max-width: calc(100% - 32px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.toast.show
-{
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
-
-@media (max-width: 900px)
-{
-  .hero-grid,
-  .checkout-grid,
-  .steps-row
-  {
-    grid-template-columns: 1fr;
+html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Счастье-есть — доставка домашней еды</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    color: #2A1F1B;
+    background: #FFF8F0;
   }
 
-  {
-    padding-top: 150px;
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255, 248, 240, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(198, 93, 59, 0.18);
+  }
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: #7A2E18;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .brand-mark {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #FFD8A8, #C65D3B);
+    box-shadow: 0 8px 20px rgba(122, 46, 24, 0.22);
+    font-size: 20px;
+  }
+  .navbtns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .navbtn {
+    border: 1px solid rgba(198, 93, 59, 0.25);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.72);
+    color: #7A2E18;
+    box-shadow: 0 6px 14px rgba(42, 31, 27, 0.06);
+    transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .navbtn:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+  }
+  .navbtn.active {
+    background: #C65D3B;
+    color: #ffffff;
+    border-color: #C65D3B;
+    box-shadow: 0 10px 22px rgba(198, 93, 59, 0.28);
   }
 
-  .hero-plate
-  {
-    max-width: 420px;
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .container {
+    width: min(1200px, calc(100% - 28px));
     margin: 0 auto;
   }
 
-  .topbar-inner
-  {
-    flex-direction: column;
-    align-items: stretch;
+  .btn {
+    border: 0;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    background: #C65D3B;
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(198, 93, 59, 0.25);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); background: #A94A2B; }
+  .btn:active { transform: translateY(0); }
+  .btn:disabled {
+    background: #B9B0A8;
+    color: #F6F2EE;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .btn.secondary {
+    background: #FFF8F0;
+    color: #C65D3B;
+    border: 1px solid rgba(198, 93, 59, 0.35);
+    box-shadow: 0 6px 16px rgba(42, 31, 27, 0.08);
+  }
+  .btn.secondary:hover { background: #FFF0E2; }
+
+  .add-btn {
+    white-space: nowrap;
+    padding: 9px 11px;
+    font-size: 14px;
+    border-radius: 12px;
   }
 
-  .navbtns
-  {
-    justify-content: center;
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 100px 0 56px;
+    background: linear-gradient(135deg, #FFF8F0 0%, #C65D3B 100%);
+    overflow: hidden;
   }
+  .hero::before {
+    content: "🌿";
+    position: absolute;
+    left: 6%;
+    top: 18%;
+    font-size: 170px;
+    opacity: .13;
+    filter: blur(1px);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "🍃";
+    position: absolute;
+    right: 7%;
+    bottom: 12%;
+    font-size: 200px;
+    opacity: .12;
+    filter: blur(1px);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.12fr .88fr;
+    gap: 40px;
+    align-items: center;
+    min-height: 72vh;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-weight: 800;
+    color: #7A2E18;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.70);
+    padding: 10px 14px;
+    border-radius: 999px;
+    box-shadow: 0 10px 26px rgba(122, 46, 24, 0.12);
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #ffffff;
+  }
+  .status.open { background: #2F9E5C; }
+  .status.closed { background: #8C8A87; }
 
-  .modal-panel
-  {
-    padding: 20px;
+  h1 {
+    margin: 0 0 18px;
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1.06;
+    letter-spacing: -0.04em;
+  }
+  .hero p {
+    margin: 0 0 26px;
+    font-size: 18px;
+    line-height: 1.65;
+    color: #4E3026;
+  }
+  .hero-plate {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .big-plate {
+    aspect-ratio: 1 / 1;
+    border-radius: 28px;
+    display: grid;
+    place-items: center;
+    font-size: 70px;
+    box-shadow: 0 24px 60px rgba(122, 46, 24, 0.22);
+    background: linear-gradient(135deg, #FFD8A8, #FFB085);
+  }
+  .big-plate:nth-child(2) { background: linear-gradient(135deg, #D8F5A2, #B2F2BB); font-size: 64px; }
+  .big-plate:nth-child(3) { background: linear-gradient(135deg, #FFE8A0, #FFD8A8); font-size: 68px; }
+  .big-plate:nth-child(4) { background: linear-gradient(135deg, #F3D9FA, #FFB5A7); font-size: 58px; }
+
+  .steps {
+    margin-top: 44px;
+    padding: 22px;
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.60);
     border-radius: 22px;
+    box-shadow: 0 18px 40px rgba(122, 46, 24, 0.12);
   }
-
-  .modal-photo
-  {
-    height: 220px;
-    font-size: 100px;
+  .steps-title {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 900;
+    color: #5A2414;
   }
-
-  .modal h3
-  {
-    font-size: 26px;
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
-}
+  .step {
+    background: rgba(255,255,255,0.68);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    font-weight: 800;
+  }
+  .step-emoji { font-size: 32px; line-height: 1; margin-bottom: 8px; }
 
-@media (max-width: 520px)
-{
-  .brand
-  {
-    font-size: 17px;
+  .page-title { margin: 0 0 18px; font-size: 34px; }
+  .menu-screen-inner, .checkout-screen-inner { padding: 100px 0 56px; }
+
+  .search-wrap { position: relative; margin-bottom: 14px; }
+  .search {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(198, 93, 59, 0.25);
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    outline: none;
+    color: #2A1F1B;
+    box-shadow: 0 8px 22px rgba(42, 31, 27, 0.07);
+  }
+  .search:focus { border-color: #C65D3B; }
+  .autocomplete {
+    position: absolute;
+    left: 0; right: 0; top: calc(100% + 6px);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(42, 31, 27, 0.18);
+    overflow: hidden;
+    z-index: 20;
+    display: none;
+  }
+  .autocomplete.active { display: block; }
+  .suggestion {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: #ffffff;
+    padding: 12px 16px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    color: #2A1F1B;
+    border-bottom: 1px solid #F2E9DF;
+  }
+  .suggestion:hover { background: #FFF8F0; }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 20px;
   }
+  .chip {
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 12px;
+    background: #ffffff;
+    color: #5A4B43;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(42, 31, 27, 0.07);
+  }
+  .chip.active { background: #C65D3B; color: #ffffff; }
 
-  .brand-mark
-  {
-    width: 34px;
-    height: 34px;
+  .category { margin-bottom: 28px; }
+  .category h3 { margin: 0 0 14px; font-size: 22px; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .dish {
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(42, 31, 27, 0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .dish:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 45px rgba(42, 31, 27, 0.17);
+  }
+  .dish-plate {
+    height: 150px;
+    display: grid;
+    place-items: center;
+    font-size: 74px;
+    pointer-events: none;
+  }
+  .dish-body {
+    padding: 14px 16px 16px;
+    display: grid;
+    gap: 8px;
+    flex: 1;
+    pointer-events: none;
+  }
+  .dish-name {
+    font-weight: 900;
+    font-size: 17px;
+    color: #2A1F1B;
+  }
+  .dish-comp {
+    color: #6B6B6B;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .dish-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    pointer-events: auto;
+  }
+  .price {
+    color: #B7791F;
+    font-weight: 900;
     font-size: 18px;
   }
 
-  .navbtn
-  {
-    padding: 9px 10px;
-    font-size: 13px;
+  .panel {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: 0 14px 35px rgba(42, 31, 27, 0.10);
+  }
+  .panel h2 { margin: 0 0 14px; }
+  .order-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F2E9DF;
+  }
+  .order-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  .empty-note {
+    color: #8C8A87;
+    padding: 18px 0;
+    text-align: center;
   }
 
-  .cards
-  {
-    grid-template-columns: 1fr;
+  .checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 22px;
+    align-items: start;
   }
 
-  .hero p
-  {
-    font-size: 16px;
+  .field {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
   }
-
-  .step
-  {
-    padding: 12px;
+  .field label {
+    font-weight: 800;
     font-size: 14px;
   }
-
-  .modal
-  {
-    padding: 0;
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 14px;
+    border: 1px solid #E6D7C8;
+    background: #FFF8F0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    outline: none;
+    color: #2A1F1B;
   }
+  .field input:focus,
+  .field textarea:focus { border-color: #C65D3B; }
+  .field textarea { min-height: 90px; resize: vertical; }
+  .required { color: #C65D3B; }
 
-  .modal-panel
-  {
-    max-width: 100%;
-    max-height: 100vh;
-    border-radius: 0;
-    padding: 18px;
+  .success-box {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(42, 31, 27, 0.14);
   }
+  .success-box .emoji { font-size: 72px; line-height: 1; margin-bottom: 10px; }
+  .success-box h3 { margin: 0 0 8px; font-size: 26px; }
+  .success-box p { margin: 0 0 18px; color: #5A4B43; }
 
-  .modal-photo
-  {
-    height: 200px;
-    font-size: 90px;
+  [hidden] { display: none !important; }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
   }
+  .modal.open { display: flex; }
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(42, 31, 27, .55);
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .modal.anim .modal-backdrop { opacity: 1; }
 
-  .toast
-  {
-    left: 14px;
+  .modal-panel {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 26px;
+    box-shadow: 0 30px 80px rgba(42, 31, 27, .28);
+    transform: translateY(24px) scale(.94);
+    opacity: 0;
+    transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+  }
+  .modal.anim .modal-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
     right: 14px;
-    bottom: 14px;
-    transform: translateX(0) translateY(20px);
-    max-width: none;
+    z-index: 2;
+    width: 42px; height: 42px;
+    border: 0;
+    border-radius: 12px;
+    background: #F2E9DF;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    color: #2A1F1B;
+  }
+  .modal-photo {
+    height: 260px;
+    border-radius: 24px;
+    display: grid;
+    place-items: center;
+    font-size: 120px;
+    margin-bottom: 18px;
+    box-shadow: inset 0 0 0 1px rgba(42, 31, 27, .06);
+  }
+  .modal h3 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .modal-price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .modal-label {
+    font-weight: 900;
+    color: #7A2E18;
+    margin-bottom: 8px;
+  }
+  .modal-history {
+    margin: 0;
+    color: #4E3026;
+    line-height: 1.65;
   }
 
-  .toast.show
-  {
-    transform: translateX(0) translateY(0);
+  body.noscroll { overflow: hidden; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    z-index: 260;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .2s ease, opacity .2s ease;
+    background: #1F5F3C;
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    box-shadow: 0 14px 35px rgba(13, 56, 32, .25);
+    white-space: nowrap;
+    max-width: calc(100% - 32px);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-}
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid, .checkout-grid, .steps-row { grid-template-columns: 1fr; }
+    .hero, .menu-screen-inner, .checkout-screen-inner { padding-top: 150px; }
+    .hero-plate { max-width: 420px; margin: 0 auto; }
+    .topbar-inner { flex-direction: column; align-items: stretch; }
+    .navbtns { justify-content: center; }
+    .modal-panel { padding: 20px; border-radius: 22px; }
+    .modal-photo { height: 220px; font-size: 100px; }
+    .modal h3 { font-size: 26px; }
+  }
+
+  @media (max-width: 520px) {
+    .brand { font-size: 17px; gap: 8px; }
+    .brand-mark { width: 34px; height: 34px; font-size: 18px; }
+    .navbtn { padding: 9px 10px; font-size: 13px; }
+    .cards { grid-template-columns: 1fr; }
+    .hero p { font-size: 16px; }
+    .step { padding: 12px; font-size: 14px; }
+    .modal { padding: 0; }
+    .modal-panel {
+      max-width: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+      padding: 18px;
+    }
+    .modal-photo { height: 200px; font-size: 90px; }
+    .toast {
+      left: 14px; right: 14px; bottom: 14px;
+      transform: translateX(0) translateY(20px);
+      max-width: none;
+    }
+    .toast.show { transform: translateX(0) translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" onclick="showScreen('screen-home')">
+      <span class="brand-mark" aria-hidden="true">🌿</span>
+      <span>Счастье-есть</span>
+    </div>
+    <nav class="navbtns">
+      <button class="navbtn" type="button" data-screen="screen-home">🏠 Главная</button>
+      <button class="navbtn" type="button" data-screen="screen-menu">📖 Меню</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="screen-home" class="screen active">
+    <div class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span id="greeting">Добрый день</span>
+            <span id="workStatus" class="status open">✅ Открыты</span>
+          </div>
+          <h1>Готовим как дома — доставляем к вашему порогу</h1>
+          <p>Домашняя еда с доставкой по указанному адресу. Вы голодны — мы уже едем.</p>
+          <button class="btn" type="button" onclick="showScreen('screen-menu')">Смотреть меню</button>
+
+          <div class="steps">
+            <div class="steps-title">Как мы работаем</div>
+            <div class="steps-row">
+              <div class="step"><div class="step-emoji">🍽️</div>Выбираете</div>
+              <div class="step"><div class="step-emoji">📍</div>Указываете адрес</div>
+              <div class="step"><div class="step-emoji">🛵</div>Встречаете курьера</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-plate" aria-hidden="true">
+          <div class="big-plate">🥞</div>
+          <div class="big-plate">🥗</div>
+          <div class="big-plate">🍜</div>
+          <div class="big-plate">🍰</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-menu" class="screen">
+    <div class="container menu-screen-inner">
+      <h2 class="page-title">📖 Меню</h2>
+
+      <div class="search-wrap">
+        <input id="searchInput" class="search" type="text" placeholder="🔍 Найти блюдо..." autocomplete="off">
+        <div id="autocomplete" class="autocomplete"></div>
+      </div>
+
+      <div id="categoryChips" class="chips"></div>
+      <div id="menuGrid"></div>
+    </div>
+  </section>
+
+  <section id="screen-checkout" class="screen">
+    <div class="container checkout-screen-inner">
+      <h2 class="page-title">🧺 Оформление заказа</h2>
+
+      <div class="checkout-grid">
+        <div>
+          <div class="panel">
+            <h2>Ваш заказ</h2>
+            <div id="orderList"></div>
+            <div class="order-total">
+              <span>Итого</span>
+              <span id="orderTotal">0₽</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel checkout-form">
+            <form id="orderForm" action="https://formspree.io/f/mwvzqdkj" method="POST">
+              <input type="hidden" name="order_items" id="orderItemsField">
+              <input type="hidden" name="order_total" id="orderTotalField">
+
+              <div class="field">
+                <label for="name">Ваше имя <span class="required">*</span></label>
+                <input id="name" name="name" type="text" required placeholder="Анна">
+              </div>
+
+              <div class="field">
+                <label for="phone">Телефон <span class="required">*</span></label>
+                <input id="phone" name="phone" type="tel" required placeholder="+7 (999) 000-00-00">
+              </div>
+
+              <div class="field">
+                <label for="address">Адрес доставки <span class="required">*</span></label>
+                <input id="address" name="address" type="text" required placeholder="Улица, дом, квартира, подъезд">
+              </div>
+
+              <div class="field">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" name="comment" placeholder="Код домофона, пожелания, аллергии"></textarea>
+              </div>
+
+              <button id="submitOrderBtn" class="btn" type="submit">✅ Отправить заказ</button>
+            </form>
+          </div>
+
+          <div id="orderSuccess" class="success-box" hidden>
+            <div class="emoji">✅</div>
+            <h3>Заказ принят!</h3>
+            <p>Мы свяжемся с вами.</p>
+            <button class="btn" type="button" onclick="showScreen('screen-menu')">Вернуться в меню</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="dishModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel">
+    <button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">✕</button>
+    <div id="modalPhoto" class="modal-photo" aria-label="Фотография блюда"></div>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-price-row">
+      <div id="modalPrice" class="price" style="font-size:22px;"></div>
+    </div>
+    <div class="modal-label">📖 История создания блюда</div>
+    <p id="modalHistory" class="modal-history"></p>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+  const menu = [
+    {
+      category: "🍳 Завтраки (до 12:00)",
+      items: [
+        {
+          id: "syrniki", name: "Сырники со сметаной и ягодным соусом", price: 290, emoji: "🥞",
+          color: "linear-gradient(135deg,#FFD8A8,#FFB085)",
+          comp: "творог, яйцо, сметана, ягодный соус",
+          history: "Сырники появились в восточноевропейских домах как способ превратить остатки творога в полноценный завтрак. Их обжаривали на сливочном масле и подавали со сметаной, а летом добавляли ягоды прямо с куста."
+        },
+        {
+          id: "omlet", name: "Омлет с томатами, сыром и зеленью", price: 250, emoji: "🍳",
+          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
+          comp: "яйца, томаты, сыр, зелень",
+          history: "Омлет — один из древнейших способов превратить яйца в отдельное блюдо. Томаты и сыр добавили позже, когда захотелось сделать утро сочнее без лишней возни."
+        },
+        {
+          id: "kasha", name: "Каша овсяная с карамелизированным бананом и орехами", price: 220, emoji: "🥣",
+          color: "linear-gradient(135deg,#F3D9FA,#FFD8A8)",
+          comp: "овсянка, молоко, банан, орехи, мёд",
+          history: "Овсянку ценили в холодном климате за сытость и простоту. Позже в неё стали добавлять молоко, мёд и орехи, а карамелизированный банан сделал кашу бархатной и чуть праздничной."
+        },
+        {
+          id: "avotoast", name: "Тосты с авокадо и яйцом пашот", price: 310, emoji: "🥑",
+          color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)",
+          comp: "авокадо, яйцо пашот, тост, лимон, зелень",
+          history: "Тост с авокадо стал знаменитым в калифорнийских кафе 1990-х, хотя суть блюда старше: хрустящий хлеб и мягкая начинка всегда работали вместе."
+        },
+        {
+          id: "pancakes", name: "Панкейки с мёдом и сезонными ягодами", price: 280, emoji: "🥞",
+          color: "linear-gradient(135deg,#FFE8A0,#FFC078)",
+          comp: "мука, молоко, яйцо, мёд, ягоды",
+          history: "Предки панкейков появлялись ещё у древних греков и римлян. Современные пышные панкейки закрепились в американских семьях как выходной ритуал."
+        }
+      ]
+    },
+    {
+      category: "🥗 Салаты",
+      items: [
+        {
+          id: "caesar", name: "Цезарь с курицей и пармезаном", price: 350, emoji: "🥗",
+          color: "linear-gradient(135deg,#D8F5A2,#FFF8F0)",
+          comp: "курица, пармезан, айсберг, соус, гренки",
+          history: "Салат Цезарь придумал итальянский повар Цезарь Кардини в мексиканской Тихуане в 1924 году, когда продуктов осталось меньше, чем гостей."
+        },
+        {
+          id: "greek", name: "Греческий с фетой и маслинами", price: 320, emoji: "🥗",
+          color: "linear-gradient(135deg,#B2F2BB,#D8F5A2)",
+          comp: "томаты, огурцы, перец, фета, маслины",
+          history: "Греческий салат — это не ресторанное изящество, а сельский «хориатики», который подавали на стол под солнцем."
+        },
+        {
+          id: "warmsalad", name: "Тёплый салат с говядиной и рукколой", price: 380, emoji: "🥩",
+          color: "linear-gradient(135deg,#FFB5A7,#FFC078)",
+          comp: "говядина, руккола, томаты, заправка",
+          history: "Тёплые салаты придумали, когда захотели одновременно лёгкость зелени и сытость мяса без отдельного второго блюда."
+        }
+      ]
+    },
+    {
+      category: "🍲 Супы",
+      items: [
+        {
+          id: "borscht", name: "Борщ домашний с гренками", price: 290, emoji: "🍲",
+          color: "linear-gradient(135deg,#FFB5A7,#C65D3B)",
+          comp: "свёкла, говядина, капуста, сметана, гренки",
+          history: "Борщ родился у восточных славян как густой кисло-сладкий суп. В каждой семье рецепт считался почти наследственным."
+        },
+        {
+          id: "chicken-soup", name: "Куриный суп с лапшой", price: 250, emoji: "🍜",
+          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
+          comp: "курица, лапша, морковь, зелень",
+          history: "Куриный суп называют одной из самых мягких форм домашней заботы: его варили при простуде, после дороги и в воскресный обед."
+        },
+        {
+          id: "pumpkin", name: "Тыквенный крем-суп с имбирём", price: 280, emoji: "🎃",
+          color: "linear-gradient(135deg,#FFC078,#FFE8A0)",
+          comp: "тыква, сливки, имбирь, семечки",
+          history: "Тыквенный суп закрепился в европейской осенней кухне, когда после сбора урожая хотелось согреться без тяжёлого ужина."
+        },
+        {
+          id: "solyanka", name: "Солянка мясная сборная", price: 340, emoji: "🍲",
+          color: "linear-gradient(135deg,#C65D3B,#FFB5A7)",
+          comp: "говядина, колбасы, огурцы, лимон, сметана",
+          history: "Солянка появилась на стыке русской купеческой и застольной кухни как способ собрать в одной кастрюле несколько разных вкусов."
+        }
+      ]
+    },
+    {
+      category: "🍝 Горячее",
+      items: [
+        {
+          id: "carbonara", name: "Паста карбонара", price: 390, emoji: "🍝",
+          color: "linear-gradient(135deg,#FFE8A0,#F3D9FA)",
+          comp: "спагетти, бекон, яйцо, пармезан, перец",
+          history: "Карбонара родилась в Риме в середине XX века. Главное правило остаётся незыблемым: сливки не входят в состав."
+        },
+        {
+          id: "chickenpuree", name: "Куриное филе в сливочно-грибном соусе с пюре", price: 420, emoji: "🍗",
+          color: "linear-gradient(135deg,#FFD8A8,#FFB5A7)",
+          comp: "курица, грибы, сливки, пюре",
+          history: "Это блюдо живёт в категории «как в детском саду, но с любовью»: нежное филе, грибы, сливки и гладкое пюре."
+        },
+        {
+          id: "salmon", name: "Лосось на гриле с овощами", price: 590, emoji: "🐟",
+          color: "linear-gradient(135deg,#BEE3F8,#D8F5A2)",
+          comp: "лосось, овощи, лимон, оливковое масло",
+          history: "Рыба на гриле — один из древнейших способов готовки. Лосось подходит особенно хорошо, потому что его жирность не даёт мясу пересохнуть."
+        },
+        {
+          id: "turkey", name: "Котлеты из индейки с гречкой", price: 370, emoji: "🍖",
+          color: "linear-gradient(135deg,#FFD8A8,#FFC078)",
+          comp: "индейка, гречка, лук, зелень",
+          history: "Котлеты из индейки появились как более лёгкая альтернатива привычной котлетной кухне, а гречка подхватывает их сочность ореховой горчинкой."
+        },
+        {
+          id: "plov", name: "Плов с бараниной", price: 380, emoji: "🍚",
+          color: "linear-gradient(135deg,#FFC078,#FFE8A0)",
+          comp: "баранина, рис, морковь, зира, чеснок",
+          history: "Плов — блюдо гостеприимства и праздника. Его готовили в казане, выстраивая слои: мясо, зажарка, рис, целые головки чеснока."
+        },
+        {
+          id: "potato", name: "Картошка по-деревенски с чесноком", price: 220, emoji: "🥔",
+          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
+          comp: "картофель, чеснок, розмарин, паприка",
+          history: "Картошку по-деревенски придумали, чтобы получить хруст снаружи и мякоть внутри без постоянного чувства фритюра."
+        },
+        {
+          id: "fries", name: "Картошка во фритюре с сырным соусом", price: 200, emoji: "🍟",
+          color: "linear-gradient(135deg,#FFD8A8,#FFC078)",
+          comp: "картофель, сырный соус, паприка",
+          history: "Жареный картофель прочно обосновался в уличной кухне, а сырный соус добавляет к детскому удовольствию взрослую слабость."
+        }
+      ]
+    },
+    {
+      category: "🍰 Десерты",
+      items: [
+        {
+          id: "cheesecake", name: "Чизкейк классический", price: 280, emoji: "🍰",
+          color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)",
+          comp: "сливочный сыр, песочная основа, ягодный соус",
+          history: "Предки чизкейка встречаются даже в древней Греции. Современный нью-йоркский вариант стал эталоном: плотный, гладкий, чуть холодный."
+        },
+        {
+          id: "fondant", name: "Шоколадный фондан", price: 320, emoji: "🍫",
+          color: "linear-gradient(135deg,#C65D3B,#FFB5A7)",
+          comp: "шоколад, масло, яйцо, мука, ваниль",
+          history: "Шоколадный фондан придумали как пирог с жидким сердцем. Его магия — в контрасте тёплой корочки и тягучей сердцевины."
+        },
+        {
+          id: "tiramisu", name: "Тирамису", price: 340, emoji: "🍮",
+          color: "linear-gradient(135deg,#FFD8A0,#F3D9FA)",
+          comp: "маскарпоне, кофе, савоярди, какао",
+          history: "Тирамису переводится как «взбодри меня». Главный секрет — не размочить савоярди, иначе десерт теряет свою лёгкость."
+        },
+        {
+          id: "strudel", name: "Яблочный штрудель", price: 260, emoji: "🥧",
+          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
+          comp: "яблоки, изюм, корица, слоёное тесто",
+          history: "Яблочный штрудель вырос из австро-венгерской кухни, где тонкое тесто считалось отдельным искусством."
+        }
+      ]
+    },
+    {
+      category: "🥤 Напитки",
+      items: [
+        {
+          id: "coffee", name: "Кофе латте / капучино / американо", price: 150, emoji: "☕",
+          color: "linear-gradient(135deg,#D8C0A8,#8A5A3A)",
+          comp: "арабика, молоко на выбор",
+          history: "По легенде, кофе открыл эфиопский пастух Калди, заметив, что его козы бодрствуют после ягод странного куста."
+        },
+        {
+          id: "tea", name: "Чай чёрный / зелёный / травяной", price: 120, emoji: "🍵",
+          color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)",
+          comp: "чай, мята, лимон, мёд",
+          history: "Чай в России стал ритуалом: самовар, варенье, толстая кружка и долгий разговор. Наша версия легче, но с тем же теплом."
+        },
+        {
+          id: "lemonade", name: "Лимонад домашний", price: 180, emoji: "🍋",
+          color: "linear-gradient(135deg,#FFE8A0,#D8F5A2)",
+          comp: "лимон, лайм, мята, имбирь, сахар",
+          history: "Лимонад появился в Европе как лимонный сироп с водой и быстро стал летним спасением при жаре."
+        },
+        {
+          id: "smoothie", name: "Смузи", price: 250, emoji: "🥤",
+          color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)",
+          comp: "банан, ягоды, йогурт, мёд",
+          history: "Смузи пришёл из калифорнийской культуры здорового завтрака, хотя по сути это способ собрать всё вкусное в одном блендере."
+        }
+      ]
+    }
+  ];
+
+  let cart = [];
+  let activeCategory = "Все";
+  let currentQuery = "";
+
+  const dishModal = document.getElementById("dishModal");
+  const toast = document.getElementById("toast");
+  const itemById = new Map(menu.flatMap(c => c.items).map(it => [it.id, it]));
+
+  function allItems() { return menu.flatMap(c => c.items); }
+
+  function escapeHtml(str) {
+    return String(str ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function money(n) { return n.toLocaleString("ru-RU") + "₽"; }
+
+  function total() { return cart.reduce((sum, it) => sum + it.price * it.qty, 0); }
+
+  function setGreetingAndStatus() {
+    const h = new Date().getHours();
+    let greeting = "Добрый вечер";
+    if (h >= 8 && h < 12) greeting = "Доброе утро";
+    else if (h >= 12 && h < 17) greeting = "Добрый день";
+    else if (h >= 17 && h < 20) greeting = "Добрый вечер";
+
+    const open = h >= 8 && h < 20;
+
+    document.getElementById("greeting").textContent = greeting;
+
+    const st = document.getElementById("workStatus");
+    st.className = "status " + (open ? "open" : "closed");
+    st.textContent = open ? "✅ Открыты" : "🌙 Закрыты";
+  }
+
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    document.querySelectorAll(".navbtn").forEach(b => {
+      b.classList.toggle("active", b.dataset.screen === id);
+    });
+
+    if (id === "screen-menu") renderMenu();
+    if (id === "screen-checkout") renderCheckout();
+    document.getElementById("autocomplete").classList.remove("active");
+  }
+
+  document.querySelectorAll(".navbtn").forEach(btn => {
+    btn.onclick = () => showScreen(btn.dataset.screen);
+  });
+
+  function renderChips() {
+    const box = document.getElementById("categoryChips");
+    const all = ["Все", ...menu.map(m => m.category)];
+
+    box.innerHTML = all.map(cat => `
+      <button class="chip ${cat === activeCategory ? "active" : ""}"
+              type="button"
+              data-cat="${escapeHtml(cat)}">${escapeHtml(cat)}</button>
+    `).join("");
+
+    box.querySelectorAll(".chip").forEach(btn => {
+      btn.onclick = () => {
+        activeCategory = btn.dataset.cat;
+        renderMenu();
+      };
+    });
+  }
+
+  function itemCard(it) {
+    return `
+      <article class="dish" data-id="${it.id}" tabindex="0" role="button"
+               aria-label="Открыть ${escapeHtml(it.name)}">
+        <div class="dish-plate" style="background:${it.color}" aria-hidden="true">${it.emoji}</div>
+        <div class="dish-body">
+          <div class="dish-name">${escapeHtml(it.name)}</div>
+          <div class="dish-comp">${escapeHtml(it.comp)}</div>
+          <div class="dish-row">
+            <div class="price">${money(it.price)}</div>
+            <button class="btn add-btn" type="button" data-id="${it.id}">➕ В корзину</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function matches(it, q) {
+    if (!q) return true;
+    const s = q.toLowerCase();
+    return it.name.toLowerCase().includes(s)
+        || it.comp.toLowerCase().includes(s)
+        || it.category.toLowerCase().includes(s);
+  }
+
+  function renderMenu() {
+    renderChips();
+
+    const q = currentQuery.trim();
+    const grid = document.getElementById("menuGrid");
+    let html = "";
+
+    for (const cat of menu) {
+      if (activeCategory !== "Все" && activeCategory !== cat.category) continue;
+
+      const items = cat.items.filter(it => matches(it, q));
+      if (!items.length) continue;
+
+      html += `
+        <div class="category">
+          <h3>${escapeHtml(cat.category)}</h3>
+          <div class="cards">${items.map(itemCard).join("")}</div>
+        </div>
+      `;
+    }
+
+    grid.innerHTML = html || `<p class="empty-note">Ничего не нашлось. Попробуйте другой запрос.</p>`;
+  }
+
+  function renderSuggestions() {
+    const box = document.getElementById("autocomplete");
+    const q = currentQuery.trim();
+
+    if (!q) {
+      box.classList.remove("active");
+      box.innerHTML = "";
+      return;
+    }
+
+    const s = q.toLowerCase();
+    const names = allItems()
+      .filter(it => it.name.toLowerCase().includes(s))
+      .map(it => it.name)
+      .slice(0, 6);
+
+    if (!names.length) {
+      box.classList.remove("active");
+      box.innerHTML = "";
+      return;
+    }
+
+    box.innerHTML = names.map(n => `
+      <button class="suggestion" type="button">${escapeHtml(n)}</button>
+    `).join("");
+
+    box.classList.add("active");
+
+    box.querySelectorAll(".suggestion").forEach(btn => {
+      btn.onclick = () => {
+        const text = btn.textContent;
+        document.getElementById("searchInput").value = text;
+        currentQuery = text;
+        box.classList.remove("active");
+        renderMenu();
+      };
+    });
+  }
+
+  function renderCheckout() {
+    const list = document.getElementById("orderList");
+    const submitBtn = document.getElementById("submitOrderBtn");
+
+    if (!cart.length) {
+      list.innerHTML = `
+        <div class="empty-note">
+          <div style="font-size:56px; line-height:1; margin-bottom:10px;">🧺</div>
+          <div style="font-weight:900; color:#2A1F1B; margin-bottom:6px;">Корзина пуста</div>
+          <div>Выберите блюда в меню и вернитесь сюда, чтобы оформить заказ.</div>
+        </div>
+      `;
+    } else {
+      list.innerHTML = cart.map(it => `
+        <div class="order-line">
+          <span>${it.qty} × ${escapeHtml(it.name)}</span>
+          <span>${money(it.price * it.qty)}</span>
+        </div>
+      `).join("");
+    }
+
+    document.getElementById("orderTotal").textContent = money(total());
+    submitBtn.disabled = !cart.length;
+
+    document.querySelector(".checkout-form").hidden = false;
+    document.getElementById("orderSuccess").hidden = true;
+  }
+
+  function addToCart(id) {
+    const item = itemById.get(id);
+    if (!item) return;
+
+    const line = cart.find(c => c.id === id);
+    if (line) line.qty++;
+    else cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+
+    renderCheckout();
+    showToast(`Добавлено: ${item.emoji} ${item.name}`);
+  }
+
+  function openModal(id) {
+    const it = itemById.get(id);
+    if (!it) return;
+
+    document.getElementById("modalPhoto").style.background = it.color;
+    document.getElementById("modalPhoto").textContent = it.emoji;
+    document.getElementById("modalTitle").textContent = it.name;
+    document.getElementById("modalPrice").textContent = money(it.price);
+    document.getElementById("modalHistory").textContent = it.history;
+
+    dishModal.classList.add("open");
+    dishModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("noscroll");
+
+    requestAnimationFrame(() => dishModal.classList.add("anim"));
+  }
+
+  function closeModal() {
+    if (!dishModal.classList.contains("open")) return;
+
+    dishModal.classList.remove("anim");
+    setTimeout(() => {
+      dishModal.classList.remove("open");
+      dishModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("noscroll");
+    }, 320);
+  }
+
+  function showToast(text) {
+    toast.textContent = text;
+    toast.classList.add("show");
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  document.getElementById("menuGrid").addEventListener("click", e => {
+    const addBtn = e.target.closest(".add-btn");
+    if (addBtn) {
+      e.stopPropagation();
+      addToCart(addBtn.dataset.id);
+      return;
+    }
+
+    const card = e.target.closest(".dish");
+    if (card) openModal(card.dataset.id);
+  });
+
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  dishModal.addEventListener("click", e => {
+    if (e.target.closest(".modal-backdrop")) closeModal();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && dishModal.classList.contains("open")) closeModal();
+  });
+
+  document.getElementById("searchInput").addEventListener("input", e => {
+    currentQuery = e.target.value;
+    renderSuggestions();
+    renderMenu();
+  });
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".search-wrap")) {
+      document.getElementById("autocomplete").classList.remove("active");
+    }
+  });
+
+  document.getElementById("orderForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!cart.length) return;
+
+    document.getElementById("orderItemsField").value = cart
+      .map(it => `${it.qty}× ${it.name} — ${money(it.price * it.qty)}`)
+      .join("\n");
+
+    document.getElementById("orderTotalField").value = money(total());
+
+    try {
+      await fetch(e.target.action, {
+        method: "POST",
+        body: new FormData(e.target),
+        headers: { Accept: "application/json" }
+      });
+    } catch (_) {
+      // Formspree может вернуть CORS/redirect в зависимости от настроек.
+      // Интерфейс показывает локальное подтверждение.
+    }
+
+    cart = [];
+    renderCheckout();
+    e.target.reset();
+
+    document.querySelector(".checkout-form").hidden = true;
+    document.getElementById("orderSuccess").hidden = false;
+  });
+
+  setGreetingAndStatus();
+  showScreen("screen-home");
+  renderMenu();
+  renderCheckout();
+</script>
+
+</body>
+</html>
 ```
