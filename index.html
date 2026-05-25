@@ -1236,7 +1236,10 @@
   });
 
   document.addEventListener("click", e => {
-    if 
+    if (!e.target.closest(".search-wrap")) {
+      document.getElementById("autocomplete").classList.remove("active");
+    }
+  });
   });
 
   document.getElementById("modalClose").addEventListener("click", closeModal);
