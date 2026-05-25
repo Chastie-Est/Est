@@ -91,6 +91,7 @@
     align-items: center;
     min-height: 70vh;
   }
+  .hero kbd { font-family: Arial, sans-serif; }
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -256,24 +257,16 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform .25s ease, box-shadow .25s ease;
-    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
   }
-  .dish:hover { transform: translateY(-4px); box-shadow: 0 20px 45px rgba(42,31,27,0.18); }
+  .dish:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(42,31,27,0.16); }
   .dish-plate {
-    height: 150px;
+    height: 130px;
     display: grid;
     place-items: center;
-    font-size: 72px;
-    pointer-events: none;
+    font-size: 64px;
   }
-  .dish-body {
-    padding: 14px 16px 16px;
-    display: grid;
-    gap: 8px;
-    flex: 1;
-    pointer-events: none;
-  }
+  .dish-body { padding: 14px 16px 16px; display: grid; gap: 8px; flex: 1; }
   .dish-name { font-weight: 800; font-size: 17px; }
   .dish-comp { color: #6B6B6B; font-size: 13px; line-height: 1.45; }
   .dish-row {
@@ -282,7 +275,6 @@
     justify-content: space-between;
     gap: 10px;
     margin-top: auto;
-    pointer-events: auto;
   }
   .price { color: #B7791F; font-weight: 900; font-size: 18px; }
   .add-btn { white-space: nowrap; padding: 9px 11px; font-size: 14px; border-radius: 12px; }
@@ -314,7 +306,6 @@
     font-family: Arial, sans-serif;
     font-weight: 800;
   }
-  .cart-body { }
   .cart-empty {
     color: #8C8A87;
     padding: 18px 0;
@@ -416,91 +407,6 @@
   .success-box h3 { margin: 0 0 8px; font-size: 26px; }
   .success-box p { margin: 0 0 18px; color: #5A4B43; }
 
-  .modal {
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .modal.active { display: flex; }
-  .modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(42,31,27,.55);
-    opacity: 0;
-    transition: opacity .45s ease;
-  }
-  .modal.in .modal-backdrop { opacity: 1; }
-  .modal-panel {
-    position: relative;
-    width: 100%;
-    max-width: 760px;
-    max-height: calc(100vh - 40px);
-    overflow: auto;
-    background: #fff;
-    border-radius: 28px;
-    padding: 28px;
-    box-shadow: 0 30px 80px rgba(42,31,27,.28);
-    transform: translateY(34px) scale(.92);
-    opacity: 0;
-    transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .5s ease;
-  }
-  .modal.in .modal-panel {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 2;
-    width: 42px;
-    height: 42px;
-    border: 0;
-    border-radius: 12px;
-    background: #F2E9DF;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  .modal-photo {
-    height: 280px;
-    border-radius: 24px;
-    display: grid;
-    place-items: center;
-    font-size: 130px;
-    margin-bottom: 18px;
-    box-shadow: inset 0 0 0 1px rgba(42,31,27,.06);
-  }
-  .modal h3 {
-    margin: 0 0 18px;
-    font-size: 30px;
-    letter-spacing: -0.02em;
-  }
-  .modal-section { margin-bottom: 18px; }
-  .modal-section:last-child { margin-bottom: 0; }
-  .modal-label {
-    font-weight: 800;
-    color: #7A2E18;
-    margin-bottom: 8px;
-  }
-  .modal-ingredients {
-    margin: 0;
-    padding-left: 20px;
-    color: #4E3026;
-    line-height: 1.55;
-  }
-  .modal-ingredients li { margin-bottom: 4px; }
-  .modal-history {
-    margin: 0;
-    color: #4E3026;
-    line-height: 1.6;
-  }
-  body.noscroll { overflow: hidden; }
-
   @media (max-width: 980px) {
     .hero-grid,
     .menu-layout,
@@ -520,16 +426,12 @@
     .cart-toggle { display: inline-block; }
     .topbar-inner { flex-direction: column; align-items: stretch; }
     .navbtns { justify-content: center; }
-    .modal-panel { padding: 22px; }
-    .modal-photo { height: 230px; font-size: 110px; }
-    .modal h3 { font-size: 26px; }
   }
 
   @media (max-width: 520px) {
     .cards { grid-template-columns: 1fr; }
     .hero p { font-size: 16px; }
     .step { padding: 12px; font-size: 14px; }
-    .modal-photo { height: 200px; font-size: 96px; }
   }
 </style>
 </head>
@@ -537,11 +439,11 @@
 
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="brand"></div>
+    <div class="brand">🍲 Домашняя доставка</div>
     <div class="navbtns">
       <button class="btn secondary" type="button" onclick="showScreen('screen-home')">🏠 Главная</button>
       <button class="btn secondary" type="button" onclick="showScreen('screen-menu')">📖 Меню</button>
-      <button class="btn" type="button" onclick="showScreen('screen-checkout')">🧺 Корзина</button>
+      <button class="btn" type="button" onclick="showScreen('screen-menu')">🧺 Корзина</button>
     </div>
   </div>
 </header>
@@ -637,7 +539,8 @@
 
         <div>
           <div class="panel checkout-form">
-            <form id="orderForm" action="https://formspree.io/f/mwvzqdkj" method="POST">
+            <!-- Замените ВАШ_УНИКАЛЬНЫЙ_ID на ID из Formspree -->
+            <form id="orderForm" action="https://formspree.io/f/ВАШ_УНИКАЛЬНЫЙ_ID" method="POST">
               <input type="hidden" name="order_items" id="orderItemsField">
               <input type="hidden" name="order_total" id="orderTotalField">
 
@@ -677,325 +580,63 @@
   </section>
 </main>
 
-<div id="dishModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal-backdrop"></div>
-  <div class="modal-panel">
-    <button id="modalClose" class="modal-close" type="button" aria-label="Закрыть">✖</button>
-    <div id="modalPhoto" class="modal-photo" aria-label="Фотография блюда"></div>
-    <h3 id="modalTitle"></h3>
-
-    <div class="modal-section">
-      <div class="modal-label">🥬 Ингредиенты</div>
-      <ul id="modalIngredients" class="modal-ingredients"></ul>
-    </div>
-
-    <div class="modal-section">
-      <div class="modal-label">📖 История создания блюда</div>
-      <p id="modalHistory" class="modal-history"></p>
-    </div>
-  </div>
-</div>
-
 <script>
   const menu = [
     {
       category: "🍳 Завтраки",
       items: [
-        {
-          id: "syrniki",
-          name: "Сырники",
-          price: 290,
-          emoji: "🥞",
-          color: "linear-gradient(135deg,#FFD8A8,#FFB085)",
-          comp: "творог, яйцо, сметана, ягодный соус",
-          ingredients: "творог 9%, куриное яйцо, пшеничная мука, сахар, сливочное масло, сметана, ягодный соус",
-          history: "Сырники пришли из восточноевропейской кухни: творог смешивали с яйцом и мукой, обжаривали на сковороде и подавали со сметаной. Это блюдо родилось из желания не выбрасывать остатки творога и превращать простые продукты в тёплый домашний завтрак."
-        },
-        {
-          id: "omlet",
-          name: "Омлет",
-          price: 250,
-          emoji: "🍳",
-          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
-          comp: "яйца, молоко, сливочное масло, зелень",
-          ingredients: "куриные яйца, молоко, сливочное масло, сливки, зелёный лук, укроп, соль, перец",
-          history: "Омлет считается одной из старейших форм готовки яиц. Французская классическая версия — нежная и слегка жидковатая, а домашний вариант с молоком прижился в семьях за простоту: взбил яйца, подогрел сковороду, добавил зелень — и завтрак готов."
-        },
-        {
-          id: "kasha",
-          name: "Каша овсяная",
-          price: 220,
-          emoji: "🥣",
-          color: "linear-gradient(135deg,#F3D9FA,#FFD8A8)",
-          comp: "овсянка, молоко, мёд, яблоко",
-          ingredients: "овсяные хлопья, молоко, сливочное масло, мёд, яблоко, корица, щепотка соли",
-          history: "Овсянку готовили ещё в Шотландии и Ирландии как сытую утреннюю еду для холодного климата. Позже она стала символом заботливого дома: бабушки варили её на молоке, добавляли масло и мёд, а запах корицы надолго оставался в кухне."
-        },
-        {
-          id: "avotoast",
-          name: "Тосты с авокадо",
-          price: 310,
-          emoji: "🥑",
-          color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)",
-          comp: "авокадо, яйцо пашот, семена льна, лимон",
-          ingredients: "хлеб на закваске, авокадо, яйцо пашот, лимонный сок, оливковое масло, семена льна, чили хлопья",
-          history: "Тост с авокадо стал культовым в калифорнийских кафе 1990-х, но его суть старая: хрустящий хлеб, мягкая начинка и кислинка лимона. Идея — взять простые продукты и собрать из них завтрак, который выглядит солнечно даже в пасмурный день."
-        },
-        {
-          id: "pancakes",
-          name: "Панкейки",
-          price: 280,
-          emoji: "🥞",
-          color: "linear-gradient(135deg,#FFE8A0,#FFC078)",
-          comp: "пшеничная мука, молоко, кленовый сироп, масло",
-          ingredients: "пшеничная мука, молоко, яйцо, сахар, сливочное масло, разрыхлитель, кленовый сироп",
-          history: "Предки панкейков появились ещё у древних греков и римлян: тесто выливали на раскалённый камень. Современные пушистые панкейки закрепились в американских семьях: высокая стопка, масло между слоями и кленовый сироп сверху — это про заботу и выходной."
-        }
+        { id: "syrniki", name: "Сырники", price: 290, emoji: "🥞", color: "linear-gradient(135deg,#FFD8A8,#FFB085)", comp: "творог, яйцо, сметана, ягодный соус" },
+        { id: "omlet", name: "Омлет", price: 250, emoji: "🍳", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "яйца, молоко, сливочное масло, зелень" },
+        { id: "kasha", name: "Каша овсяная", price: 220, emoji: "🥣", color: "linear-gradient(135deg,#F3D9FA,#FFD8A8)", comp: "овсянка, молоко, мёд, яблоко" },
+        { id: "avotoast", name: "Тосты с авокадо", price: 310, emoji: "🥑", color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)", comp: "авокадо, яйцо пашот, семена льна, лимон" },
+        { id: "pancakes", name: "Панкейки", price: 280, emoji: "🥞", color: "linear-gradient(135deg,#FFE8A0,#FFC078)", comp: "пшеничная мука, молоко, кленовый сироп, масло" }
       ]
     },
     {
       category: "🥗 Салаты",
       items: [
-        {
-          id: "caesar",
-          name: "Цезарь",
-          price: 350,
-          emoji: "🥗",
-          color: "linear-gradient(135deg,#D8F5A2,#FFF8F0)",
-          comp: "курица, пармезан, айсберг, соус цезарь, гренки",
-          ingredients: "курица, айсберг, пармезан, яйцо, анчоусы, чеснок, оливковое масло, лимон, гренки",
-          history: "Салат Цезарь придумал итальянский повар Цезарь Кардини в Тихуане в 1924 году. По легенде, продуктов осталось мало, и он собрал из того, что было: салат, хлеб, яйцо, пармезан и особый соус. Отсюда его характер — простые вещи, собранные уверенно."
-        },
-        {
-          id: "greek",
-          name: "Греческий",
-          price: 320,
-          emoji: "🥗",
-          color: "linear-gradient(135deg,#B2F2BB,#D8F5A2)",
-          comp: "томаты, огурцы, перец, фета, маслины, оливковое масло",
-          ingredients: "томаты, огурцы, сладкий перец, красный лук, фета, маслины, орегано, оливковое масло",
-          history: "Греческий салат — это деревенский «хориатики»: не изыск ресторана, а обед на столе под солнцем. Овощи резали крупно, фету не мешали снизу, масло не жалили. Главное — вкус лета, соли и аромат орегано."
-        },
-        {
-          id: "warmsalad",
-          name: "Тёплый с говядиной",
-          price: 380,
-          emoji: "🥩",
-          color: "linear-gradient(135deg,#FFB5A7,#FFC078)",
-          comp: "говядина, шпинат, картофель, горчичная заправка",
-          ingredients: "говядина, шпинат, молодой картофель, томаты черри, горчица, мёд, оливковое масло, красный лук",
-          history: "Тёплые салаты появились там, где захотели совместить лёгкость зелени и сытость горячего мяса. Горчичная заправка смягчает жирность говядины, а картофель делает блюдо по-домашнему насыщенным."
-        }
+        { id: "caesar", name: "Цезарь", price: 350, emoji: "🥗", color: "linear-gradient(135deg,#D8F5A2,#FFF8F0)", comp: "курица, пармезан, айсберг, соус цезарь, гренки" },
+        { id: "greek", name: "Греческий", price: 320, emoji: "🥗", color: "linear-gradient(135deg,#B2F2BB,#D8F5A2)", comp: "томаты, огурцы, перец, фета, маслины, оливковое масло" },
+        { id: "warmsalad", name: "Тёплый с говядиной", price: 380, emoji: "🥩", color: "linear-gradient(135deg,#FFB5A7,#FFC078)", comp: "говядина, шпинат, картофель, горчичная заправка" }
       ]
     },
     {
       category: "🍲 Супы",
       items: [
-        {
-          id: "borscht",
-          name: "Борщ",
-          price: 290,
-          emoji: "🍲",
-          color: "linear-gradient(135deg,#FFB5A7,#C65D3B)",
-          comp: "свёкла, говядина, капуста, сметана, зелень",
-          ingredients: "свёкла, говядина, картофель, капуста, морковь, лук, томатная паста, чеснок, сметана, зелень",
-          history: "Борщ родился у восточных славян как кислый суп на свёкле, капусте и бульоне. Каждая семья считала свой рецепт едва ли не семейным наследием: кто-то добавлял сливки, кто-то — белые грибы, кто-то настаивал на чесноке и сале в конце."
-        },
-        {
-          id: "chicken-soup",
-          name: "Куриный",
-          price: 250,
-          emoji: "🍜",
-          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
-          comp: "курица, вермишель, морковь, зелень",
-          ingredients: "курица, вермишель, морковь, лук, сельдерей, яйцо, зелень, лавровый лист, душистый перец",
-          history: "Куриный суп — универсальная домашняя «аптечка»: его варили при простуде, после долгой дороги и в воскресный обед. Мясо давало густой бульон, вермишель добавляла объём, а зелень и яйцо превращали миску в маленький семейный ритуал."
-        },
-        {
-          id: "pumpkin",
-          name: "Тыквенный",
-          price: 280,
-          emoji: "🎃",
-          color: "linear-gradient(135deg,#FFC078,#FFE8A0)",
-          comp: "тыква, сливки, семечки, пряности",
-          ingredients: "тыква, картофель, морковь, лук, сливки, тыквенные семечки, корица, мускатный орех",
-          history: "Тыквенный суп укрепился в европейской осенней кухне: когда урожай собран, нужен способ согреться. Сливки сглаживают землистую сладость тыквы, а специи напоминают о печёных пирогах и тёплых одеялах."
-        },
-        {
-          id: "solyanka",
-          name: "Солянка",
-          price: 340,
-          emoji: "🍲",
-          color: "linear-gradient(135deg,#C65D3B,#FFB5A7)",
-          comp: "колбасы, огурцы, лимон, сметана, зелень",
-          ingredients: "говядина, ветчина, докторская колбаса, охотничьи колбаски, солёные огурцы, лимон, маслины, томат, сметана, зелень",
-          history: "Солянка собралась на стыке русской купеческой и застольной кухни. Она возникла как способ соединить несколько вкусов — мясо, копчёность, кислоту огурца, жир бульона — в одной густой тарелке, после которой не хочется есть ещё полдня."
-        }
+        { id: "borscht", name: "Борщ", price: 290, emoji: "🍲", color: "linear-gradient(135deg,#FFB5A7,#C65D3B)", comp: "свёкла, говядина, капуста, сметана, зелень" },
+        { id: "chicken Soup", name: "Куриный", price: 250, emoji: "🍜", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "курица, вермишель, морковь, зелень" },
+        { id: "pumpkin", name: "Тыквенный", price: 280, emoji: "🎃", color: "linear-gradient(135deg,#FFC078,#FFE8A0)", comp: "тыква, сливки, семечки, пряности" },
+        { id: "solyanka", name: "Солянка", price: 340, emoji: "🍲", color: "linear-gradient(135deg,#C65D3B,#FFB5A7)", comp: "колбасы, огурцы, лимон, сметана, зелень" }
       ]
     },
     {
       category: "🍝 Горячее",
       items: [
-        {
-          id: "carbonara",
-          name: "Паста карбонара",
-          price: 390,
-          emoji: "🍝",
-          color: "linear-gradient(135deg,#FFE8A0,#F3D9FA)",
-          comp: "спагетти, бекон, яйцо, пармезан, чёрный перец",
-          ingredients: "спагетти, гуанчиале, яичный желток, пармезан, пекорино, чёрный перец, оливковое масло",
-          history: "Карбонара появилась в Риме в середине XX века: одни связывают её с угольщиками, другие — с американскими яйцами и беконом после войны. Главное правило — никаких сливок: соус держится на яйце, сыре и горячей пасте."
-        },
-        {
-          id: "chickenpuree",
-          name: "Куриное филе с пюре",
-          price: 420,
-          emoji: "🍗",
-          color: "linear-gradient(135deg,#FFD8A8,#FFB5A7)",
-          comp: "курица, картофельное пюре, сливочный соус",
-          ingredients: "куриное филе, картофель, сливочное масло, молоко, лук, морковь, сливки, мускатный орех",
-          history: "Это блюдо — из категории «как в детском саду, но с любовью»: мягкое пюре, нежная курица и лёгкий соус. Его любят за предсказуемость: нет резких нот, есть тепло тарелки и ощущение, что за вами присмотрелись."
-        },
-        {
-          id: "salmon",
-          name: "Лосось на гриле",
-          price: 590,
-          emoji: "🐟",
-          color: "linear-gradient(135deg,#BEE3F8,#D8F5A2)",
-          comp: "лосось, лимон, спаржа, оливковое масло",
-          ingredients: "лосось, спаржа, лимон, оливковое масло, чеснок, розмарин, сливочное масло, каперсы",
-          history: "Рыба на гриле — один из древнейших способов готовки: жар, дым, кислинка лимона. Лосось подошёл ему особенно хорошо: жирность не даёт мясу пересохнуть, а спаржа рядом впитывает сливочный сок."
-        },
-        {
-          id: "turkey",
-          name: "Котлеты из индейки",
-          price: 370,
-          emoji: "🍖",
-          color: "linear-gradient(135deg,#FFD8A8,#FFC078)",
-          comp: "индейка, кабачок, лук, сливочный соус",
-          ingredients: "филе индейки, кабачок, лук, яйцо, манка, сливочное масло, чеснок, укроп, сливки",
-          history: "Котлеты из индейки появились как более лёгкий вариант привычной котлетной кухни. Кабачок делает фарш сочным, а индейка не перетягивает вкус. Это блюдо для тех, кто хочет домашний ужин без тяжести во рту."
-        },
-        {
-          id: "plov",
-          name: "Плов",
-          price: 380,
-          emoji: "🍚",
-          color: "linear-gradient(135deg,#FFC078,#FFE8A0)",
-          comp: "баранина, рис, морковь, зира, барбарис",
-          ingredients: "баранина, длиннозёрный рис, морковь, лук, чеснок, зира, барбарис, куркума, растительное масло",
-          history: "Плов — блюдо праздников и гостеприимства. Его готовили в большом казане, аккуратно выстраивая слои: мясо, зажарка, рис, целые головки чеснока. Хороший плов судили не по рецепту, а по тому, сохранил ли рис отдельные зёрна."
-        },
-        {
-          id: "potato",
-          name: "Картошка по-деревенски",
-          price: 220,
-          emoji: "🥔",
-          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
-          comp: "картофель, чеснок, розмарин, паприка",
-          ingredients: "молодой картофель, чеснок, розмарин, паприка, оливковое масло, соль, перец",
-          history: "Картошку по-деревенски придумали, чтобы получить хруст снаружи и мякоть внутри без фритюрной вины. Специи здесь работают как аромат дома: чеснок, розмарин и тёплая паприка после духовки пахнут ужином, который ждут."
-        },
-        {
-          id: "fries",
-          name: "Картошка во фритюре",
-          price: 200,
-          emoji: "🍟",
-          color: "linear-gradient(135deg,#FFD8A8,#FFC078)",
-          comp: "молодой картофель, соль, паприка, соус на выбор",
-          ingredients: "картофель, растительное масло, соль, паприка, чесночный порошок, соус на выбор",
-          history: "Жареный картофель укоренился в бельгийско-французской уличной кухне, а затем покорил фастфуд. Наша версия — про детский вкус: румяные палочки, щепотка паприки и соус, в который удобно макать даже пальцами."
-        }
+        { id: "carbonara", name: "Паста карбонара", price: 390, emoji: "🍝", color: "linear-gradient(135deg,#FFE8A0,#F3D9FA)", comp: "спагетти, бекон, яйцо, пармезан, чёрный перец" },
+        { id: "chickenpuree", name: "Куриное филе с пюре", price: 420, emoji: "🍗", color: "linear-gradient(135deg,#FFD8A8,#FFB5A7)", comp: "курица, картофельное пюре, сливочный соус" },
+        { id: "salmon", name: "Лосось на гриле", price: 590, emoji: "🐟", color: "linear-gradient(135deg,#BEE3F8,#D8F5A2)", comp: "лосось, лимон, спаржа, оливковое масло" },
+        { id: "turkey", name: "Котлеты из индейки", price: 370, emoji: "🍖", color: "linear-gradient(135deg,#FFD8A8,#FFC078)", comp: "индейка, кабачок, лук, сливочный соус" },
+        { id: "plov", name: "Плов", price: 380, emoji: "🍚", color: "linear-gradient(135deg,#FFC078,#FFE8A0)", comp: "баранина, рис, морковь, зира, барбарис" },
+        { id: "potato", name: "Картошка по-деревенски", price: 220, emoji: "🥔", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "картофель, чеснок, розмарин, паприка" },
+        { id: "fries", name: "Картошка во фритюре", price: 200, emoji: "🍟", color: "linear-gradient(135deg,#FFD8A8,#FFC078)", comp: "молодой картофель, соль, паприка, соус на выбор" }
       ]
     },
     {
       category: "🍰 Десерты",
       items: [
-        {
-          id: "cheesecake",
-          name: "Чизкейк",
-          price: 280,
-          emoji: "🍰",
-          color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)",
-          comp: "сливочный сыр, песочная основа, ягодное кули",
-          ingredients: "сливочный сыр, сливки, сахар, яйцо, песочное печенье, сливочное масло, ягодное кули",
-          history: "Чизкейк старше многих десертов: его предки встречаются ещё в древней Греции. Современный нью-йоркский вариант — плотный, гладкий, чуть холодный — стал мерилом качества: если он трещит по краю и не проваливается вилкой, всё сделано верно."
-        },
-        {
-          id: "fondant",
-          name: "Фондан",
-          price: 320,
-          emoji: "🍫",
-          color: "linear-gradient(135deg,#C65D3B,#FFB5A7)",
-          comp: "тёмный шоколад, сливочное масло, ваниль, мороженое",
-          ingredients: "тёмный шоколад, сливочное масло, яйцо, сахар, пшеничная мука, ваниль, шарик ванильного мороженого",
-          history: "Фондан придумали французские кондитеры как шоколадный пирог с жидким сердцем. Его магия в контрасте: хрустящий край, тёплая тягучая масса внутри и холодное мороженое сверху. Это десерт для тех, кто любит «ещё один маленький кусочек»."
-        },
-        {
-          id: "tiramisu",
-          name: "Тирамису",
-          price: 340,
-          emoji: "🍮",
-          color: "linear-gradient(135deg,#FFD8A8,#F3D9FA)",
-          comp: "маскарпоне, кофе, савоярди, какао",
-          ingredients: "маскарпоне, яйцо, сахар, кофе эспрессо, савоярди, какао, марсала, ваниль",
-          history: "Тирамису переводится как «взбодри меня» — за кофе и лёгкий шоколадный вкус. Его приписывают Венето 1960–70-х: печенье быстро окунали в кофе, выкладывали слоями с кремом и посыпали какао. Главный секрет — не размочить савоярди."
-        },
-        {
-          id: "strudel",
-          name: "Штрудель",
-          price: 260,
-          emoji: "🥧",
-          color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)",
-          comp: "яблоки, изюм, корица, слоёное тесто, орехи",
-          ingredients: "яблоки, слоёное тесто, изюм, корица, грецкие орехи, сахар, сливочное масло, панировочные сухари",
-          history: "Яблочный штрудель вырос из австро-венгерской кухни, где тонкое тесто было почти искусством: его должно было просвечивать газету. Начинка — яблоки, корица, изюм — собиралась из того, что хранилось зимой, и пахла домом даже в холодные месяцы."
-        }
+        { id: "cheesecake", name: "Чизкейк", price: 280, emoji: "🍰", color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)", comp: "сливочный сыр, песочная основа, ягодное кули" },
+        { id: "fondant", name: "Фондан", price: 320, emoji: "🍫", color: "linear-gradient(135deg,#C65D3B,#FFB5A7)", comp: "тёмный шоколад, сливочное масло, ваниль, мороженое" },
+        { id: "tiramisu", name: "Тирамису", price: 340, emoji: "🍮", color: "linear-gradient(135deg,#FFD8A8,#F3D9FA)", comp: "маскарпоне, кофе, савоярди, какао" },
+        { id: "strudel", name: "Штрудель", price: 260, emoji: "🥧", color: "linear-gradient(135deg,#FFE8A0,#FFD8A8)", comp: "яблоки, изюм, корица, слоёное тесто, орехи" }
       ]
     },
     {
       category: "🥤 Напитки",
       items: [
-        {
-          id: "coffee",
-          name: "Кофе",
-          price: 150,
-          emoji: "☕",
-          color: "linear-gradient(135deg,#D8C0A8,#C65D3B)",
-          comp: "арабика, молоко на выбор",
-          ingredients: "зёрна арабики, вода, молоко на выбор, тростниковый сахар по желанию",
-          history: "Кофе начинался как напиток бдения в Эфиопии и Йемене, а потом стал поводом собраться. Мы делаем его простым: хорошая обжарка, правильная вода и молоко по настроению — для утра, для паузы и для того момента, когда нужно согреть руки."
-        },
-        {
-          id: "tea",
-          name: "Чай",
-          price: 120,
-          emoji: "🍵",
-          color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)",
-          comp: "чёрный/зелёный, мята, лимон, мёд",
-          ingredients: "чёрный или зелёный чай, мята, лимон, мёд, имбирь по желанию",
-          history: "Чай в России стал не напитком, а ритуалом: самовар, варенье, толстая кружка и долгий разговор. Наша версия — легче: мята, лимон, мёд и выбор между бодростью зелёного и теплотой чёрного."
-        },
-        {
-          id: "lemonade",
-          name: "Лимонад",
-          price: 180,
-          emoji: "🍋",
-          color: "linear-gradient(135deg,#FFE8A0,#D8F5A2)",
-          comp: "лимон, мята, имбирь, газированная вода",
-          ingredients: "лимон, лайм, мята, имбирь, тростниковый сахар, газированная вода, лёд",
-          history: "Лимонад появился в Европе как лимонный сироп с водой, а позже стал летним спасением. Мы добавляем имбирь, чтобы напиток не был просто сладким: сначала кислинка, потом мята, а в конце — лёгкая горчинка."
-        },
-        {
-          id: "smoothie",
-          name: "Смузи",
-          price: 250,
-          emoji: "🥤",
-          color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)",
-          comp: "банан, ягоды, йогурт, мёд",
-          ingredients: "банан, замороженные ягоды, йогурт, мёд, овсяные хлопья, апельсиновый сок",
-          history: "Смузи пришёл из калифорнийской культуры здорового завтрака, но по сути это старый способ собрать всё вкусное в блендере. Банан делает текстуру бархатной, ягоды дают цвет, а йогурт возвращает напиток в категорию «можно и утром, и после прогулки»."
-        }
+        { id: "coffee", name: "Кофе", price: 150, emoji: "☕", color: "linear-gradient(135deg,#D8C0A8,#C65D3B)", comp: "арабика, молоко на выбор" },
+        { id: "tea", name: "Чай", price: 120, emoji: "🍵", color: "linear-gradient(135deg,#D8F5A2,#B2F2BB)", comp: "чёрный/зелёный, мята, лимон, мёд" },
+        { id: "lemonade", name: "Лимонад", price: 180, emoji: "🍋", color: "linear-gradient(135deg,#FFE8A0,#D8F5A2)", comp: "лимон, мята, имбирь, газированная вода" },
+        { id: "smoothie", name: "Смузи", price: 250, emoji: "🥤", color: "linear-gradient(135deg,#F3D9FA,#FFB5A7)", comp: "банан, ягоды, йогурт, мёд" }
       ]
     }
   ];
@@ -1003,20 +644,6 @@
   let cart = [];
   let activeCategory = "Все";
   let currentQuery = "";
-
-  const dishModal = document.getElementById("dishModal");
-
-  function allItems() {
-    return menu.flatMap(c => c.items);
-  }
-
-  function escapeHtml(str) {
-    return String(str ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
 
   function setGreetingAndStatus() {
     const h = new Date().getHours();
@@ -1032,9 +659,7 @@
     st.textContent = open ? "✅ Открыты" : "🌙 Закрыты";
   }
 
-  function money(n) {
-    return n.toLocaleString("ru-RU") + "₽";
-  }
+  function money(n) { return n.toLocaleString("ru-RU") + "₽"; }
 
   function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -1048,7 +673,7 @@
     const box = document.getElementById("categoryChips");
     const all = ["Все", ...menu.map(m => m.category)];
     box.innerHTML = all.map(cat => `
-      <button class="chip ${cat === activeCategory ? "active" : ""}" type="button" data-cat="${escapeHtml(cat)}">${escapeHtml(cat)}</button>
+      <button class="chip ${cat === activeCategory ? "active" : ""}" type="button" data-cat="${cat}">${cat}</button>
     `).join("");
     box.querySelectorAll(".chip").forEach(btn => {
       btn.onclick = () => { activeCategory = btn.dataset.cat; renderMenu(); };
@@ -1057,11 +682,11 @@
 
   function itemCard(it) {
     return `
-      <article class="dish" data-id="${it.id}">
+      <article class="dish">
         <div class="dish-plate" style="background:${it.color}" aria-hidden="true">${it.emoji}</div>
         <div class="dish-body">
-          <div class="dish-name">${escapeHtml(it.name)}</div>
-          <div class="dish-comp">${escapeHtml(it.comp)}</div>
+          <div class="dish-name">${it.name}</div>
+          <div class="dish-comp">${it.comp}</div>
           <div class="dish-row">
             <div class="price">${money(it.price)}</div>
             <button class="btn add-btn" type="button" data-id="${it.id}">➕ В корзину</button>
@@ -1074,9 +699,7 @@
   function matches(it, q) {
     if (!q) return true;
     const s = q.toLowerCase();
-    return it.name.toLowerCase().includes(s)
-      || it.comp.toLowerCase().includes(s)
-      || it.ingredients.toLowerCase().includes(s);
+    return it.name.toLowerCase().includes(s) || it.comp.toLowerCase().includes(s);
   }
 
   function renderMenu() {
@@ -1088,7 +711,7 @@
       if (activeCategory !== "Все" && activeCategory !== cat.category) continue;
       const items = cat.items.filter(it => matches(it, q));
       if (!items.length) continue;
-      html += `<div class="category"><h3>${escapeHtml(cat.category)}</h3><div class="cards">${items.map(itemCard).join("")}</div></div>`;
+      html += `<div class="category"><h3>${cat.category}</h3><div class="cards">${items.map(itemCard).join("")}</div></div>`;
     }
     if (!html) html = `<p>Ничего не нашлось. Попробуйте другой запрос.</p>`;
     grid.innerHTML = html;
@@ -1099,12 +722,12 @@
     const q = currentQuery.trim();
     if (!q) { box.classList.remove("active"); box.innerHTML = ""; return; }
     const s = q.toLowerCase();
-    const names = allItems()
+    const names = menu.flatMap(c => c.items)
       .filter(it => it.name.toLowerCase().includes(s))
       .map(it => it.name)
       .slice(0, 6);
     if (!names.length) { box.classList.remove("active"); box.innerHTML = ""; return; }
-    box.innerHTML = names.map(n => `<button class="suggestion" type="button">${escapeHtml(n)}</button>`).join("");
+    box.innerHTML = names.map(n => `<button class="suggestion" type="button">${n}</button>`).join("");
     box.classList.add("active");
     box.querySelectorAll(".suggestion").forEach(btn => {
       btn.onclick = () => {
@@ -1131,7 +754,7 @@
       html += `
         <div class="cline">
           <div class="cline-info">
-            <div class="cline-name">${escapeHtml(it.name)}</div>
+            <div class="cline-name">${it.name}</div>
             <div class="cline-qty">${it.qty} × ${money(it.price)}</div>
           </div>
           <div class="cline-right">
@@ -1149,55 +772,17 @@
     document.getElementById("goCheckout").onclick = () => showScreen("screen-checkout");
   }
 
-  function openModal(id) {
-    const it = allItems().find(x => x.id === id);
-    if (!it) return;
-
-    document.getElementById("modalPhoto").style.background = it.color;
-    document.getElementById("modalPhoto").textContent = it.emoji;
-    document.getElementById("modalTitle").textContent = it.name;
-
-    document.getElementById("modalIngredients").innerHTML = it.ingredients
-      .split(",")
-      .map(x => x.trim())
-      .filter(Boolean)
-      .map(x => `<li>${escapeHtml(x)}</li>`)
-      .join("");
-
-    document.getElementById("modalHistory").textContent = it.history;
-
-    dishModal.classList.add("active");
-    dishModal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("noscroll");
-    requestAnimationFrame(() => dishModal.classList.add("in"));
-  }
-
-  function closeModal() {
-    dishModal.classList.remove("in");
-    setTimeout(() => {
-      dishModal.classList.remove("active");
-      dishModal.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("noscroll");
-    }, 450);
-  }
-
   document.getElementById("menuGrid").addEventListener("click", e => {
-    const addBtn = e.target.closest(".add-btn");
-    if (addBtn) {
-      e.stopPropagation();
-      const id = addBtn.dataset.id;
-      const item = allItems().find(it => it.id === id);
-      if (!item) return;
-      const line = cart.find(c => c.id === id);
-      if (line) line.qty++; else cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
-      renderCart();
-      const body = document.getElementById("cartBody");
-      if (window.innerWidth <= 980) body.classList.add("open");
-      return;
-    }
-
-    const card = e.target.closest(".dish");
-    if (card) openModal(card.dataset.id);
+    const btn = e.target.closest(".add-btn");
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const item = menu.flatMap(c => c.items).find(it => it.id === id);
+    if (!item) return;
+    const line = cart.find(c => c.id === id);
+    if (line) line.qty++; else cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+    renderCart();
+    const body = document.getElementById("cartBody");
+    if (window.innerWidth <= 980) body.classList.add("open");
   });
 
   document.getElementById("cartItems").addEventListener("click", e => {
@@ -1213,12 +798,11 @@
 
   function renderCheckout() {
     const list = document.getElementById("orderList");
-    if (!cart.length) {
-      list.innerHTML = `<div style="color:#8C8A87">Корзина пуста</div>`;
-    } else {
+    if (!cart.length) { list.innerHTML = `<div style="color:#8C8A87">Корзина пуста</div>`; }
+    else {
       list.innerHTML = cart.map(it => `
         <div class="order-line">
-          <span>${it.qty} × ${escapeHtml(it.name)}</span>
+          <span>${it.qty} × ${it.name}</span>
           <span>${money(it.price * it.qty)}</span>
         </div>
       `).join("");
@@ -1236,28 +820,13 @@
   });
 
   document.addEventListener("click", e => {
-    if (!e.target.closest(".search-wrap")) {
-      document.getElementById("autocomplete").classList.remove("active");
-    }
-  });
-  });
-
-  document.getElementById("modalClose").addEventListener("click", closeModal);
-  dishModal.addEventListener("click", e => {
-    if (e.target.closest(".modal-backdrop")) closeModal();
-  });
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && dishModal.classList.contains("active")) closeModal();
+    if (!e.target.closest(".search-wrap")) document.getElementById("autocomplete").classList.remove("active");
   });
 
   document.getElementById("orderForm").addEventListener("submit", async e => {
     e.preventDefault();
     if (!cart.length) return;
-
-    document.getElementById("orderItemsField").value = cart
-      .map(it => it.qty + "× " + it.name + " — " + money(it.price * it.qty))
-      .join("\n");
-
+    document.getElementById("orderItemsField").value = cart.map(it => `${it.qty}× ${it.name} — ${money(it.price * it.qty)}`).join("\n");
     document.getElementById("orderTotalField").value = money(total());
 
     try {
@@ -1270,8 +839,6 @@
 
     cart = [];
     renderCart();
-    e.target.reset();
-
     document.querySelector(".checkout-form").hidden = true;
     document.getElementById("orderSuccess").hidden = false;
   });
@@ -1282,4 +849,4 @@
 </script>
 
 </body>
-    </html>
+             </html>
