@@ -52,6 +52,11 @@ html
     background: linear-gradient(135deg, #FFD8A8, #C65D3B);
     box-shadow: 0 8px 20px rgba(122, 46, 24, 0.22);
     font-size: 20px;
+   <div class="brand" onclick="showScreen('screen-home')">
+  <img src="https://youtu.be/K4QzEnFIApE?si=d_dGKPWULoXHPI59"
+       alt="Счастье-есть"
+       class="brand-logo">
+</div>
   }
   .navbtns {
     display: flex;
@@ -1213,7 +1218,7 @@ html
 
     cart = [];
     renderCheckout();
-    e.target.reset();
+    target.reset();
 
     document.querySelector(".checkout-form").hidden = true;
     document.getElementById("orderSuccess").hidden = false;
