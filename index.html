@@ -5,6 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Счастье-есть — кафе-пиццерия</title>
 <style>
+.promo-banner
+{
+  border-radius: 28px;
+  padding: 40px 32px;
+  background: #C62828;
+  box-shadow: 0 24px 60px rgba(122, 20, 20, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.promo-text
+{
+  color: #ffffff;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+ 
+{
+  border-radius: 28px;
+  padding: 40px 32px;
+  background: #C62828;
+  box-shadow: 0 24px 60px rgba(122, 20, 20, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.promo-text
+{
+  color: #ffffff;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 900px)
+{
+  .promo-banner
+  {
+    min-height: 200px;
+    padding: 30px 22px;
+  }
+}
+
+@media (max-width: 520px)
+{
+  .promo-banner
+  {
+    min-height: 160px;
+    padding: 24px 18px;
+  }
+}
+
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{font-family:Arial,sans-serif;color:#2A1F1B;background:#FFF8F0}
