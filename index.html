@@ -5,6 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Счастье есть — кафе-пиццерия</title>
 <style>
+  .cat-note
+{
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #FFF8F0, #FFE8D6);
+  border: 1px solid rgba(198, 93, 59, 0.25);
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #5A2414;
+  box-shadow: 0 8px 20px rgba(122, 46, 24, 0.10);
+}
+
+.cat-note-icon
+{
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.cat-note strong
+{
+  color: #C65D3B;
+}
+
+@media (max-width: 520px)
+{
+  .cat-note
+  {
+    font-size: 14px;
+    padding: 14px 14px;
+  }
+}
 .info-bar
 {
   position: fixed;
@@ -409,6 +445,13 @@ body.noscroll{overflow:hidden}
 
 <script>
 const menu=[
+  {category:"🍱 Комплексные обеды",items:[
+{id:"lunch1",name:"Обед «Классика»",price:400,emoji:"🍱",color:"linear-gradient(135deg,#FFE8A0,#FFB085)",comp:"Салат Цезарь + Куриный суп с лапшой + Паста Карбонара + Чай",history:"Классический комплексный обед — это способ попробовать всё лучшее за один присест. Салат открывает аппетит, суп согревает, паста насыщает, а чай завершает трапезу. Идеальный вариант для тех, кто не хочет выбирать между блюдами."},
+{id:"lunch2",name:"Обед «Итальянский»",price:450,emoji:"🍝",color:"linear-gradient(135deg,#FFB5A7,#F3D9FA)",comp:"Капрезе + Минестроне + Пицца Маргарита + Лимонад",history:"Итальянский обед начинается с лёгкого салата из томатов и моцареллы, продолжается наваристым овощным супом и завершается королевой стола — пиццей Маргаритой. Лимонад освежает между курсами."},
+{id:"lunch3",name:"Обед «Сытный»",price:480,emoji:"🥩",color:"linear-gradient(135deg,#C65D3B,#FFD8A8)",comp:"Греческий салат + Борщ + Куриное филе с пюре + Кофе",history:"Этот обед для тех, кто пришёл голодным и хочет уйти счастливым. Греческий салат разогревает аппетит, борщ даёт основательность, курица с пюре — сытость, а кофе — силы на остаток дня."},
+{id:"lunch4",name:"Обед «Лёгкий»",price:420,emoji:"🥗",color:"linear-gradient(135deg,#D8F5A2,#B2F2BB)",comp:"Капрезе + Томатный крем-суп + Паста Песто + Смузи",history:"Лёгкий обед для тех, кто хочет наесться, но не отяжелеть. Свежие томаты с моцареллой, бархатный суп, ароматная паста с базиликом и ягодный смузи — и можно продолжать день с лёгкостью."},
+{id:"lunch5",name:"Обед «Детский»",price:400,emoji:"🧒",color:"linear-gradient(135deg,#F3D9FA,#FFE8A0)",comp:"Куриный суп + Паста Альфредо + Панна-котта + Кола",history:"Детский обед собран из блюд, которые нравятся всем без исключения: нежный суп, сливочная паста, трясущаяся панна-котта и кола, без которой детство — не детство."}
+]}
 {category:"🍕 Пицца",items:[
 {id:"margherita",name:"Маргарита",price:390,emoji:"🍕",color:"linear-gradient(135deg,#FFD8A8,#FFB085)",comp:"томатный соус, моцарелла, базилик",history:"Маргариту создали в 1889 году в Неаполе в честь королевы Маргариты Савойской. Повар Рафаэле Эспозито выбрал три ингредиента в цвет итальянского флага: красный томат, белая моцарелла и зелёный базилик."},
 {id:"pepperoni",name:"Пепперони",price:450,emoji:"🍕",color:"linear-gradient(135deg,#FFB5A7,#C65D3B)",comp:"томатный соус, моцарелла, пепперони",history:"Пепперони — самая популярная пицца в Америке, хотя в Италии такой не существует. Американские иммигранты скрестили итальянское тесто с острой салями, и получилась классика пятничных вечеров."},
@@ -541,7 +584,16 @@ function renderMenu(){
     if(activeCategory!=="Все"&&activeCategory!==cat.category)continue;
     const items=cat.items.filter(it=>matches(it,q));
     if(!items.length)continue;
-    html+=`<div class="category"><h3>${escapeHtml(cat.category)}</h3><div class="cards">${items.map(itemCard).join("")}</div></div>`;
+   let catNote="";
+if(cat.category==="🍱 Комплексные обеды"){
+  catNote=`<div class="cat-note">
+    <div class="cat-note-icon">🕐</div>
+    <div>
+      <strong>Комплексный обед</strong> — это первое, второе и третье в одном заказе. Подаётся <strong>только с 12:00 до 15:00</strong>. Стоимость — <strong>от 400₽</strong>.
+    </div>
+  </div>`;
+}
+html+=`<div class="category"><h3>${escapeHtml(cat.category)}</h3>${catNote}<div class="cards">${items.map(itemCard).join("")}</div></div>`;;
   }
   grid.innerHTML=html||`<p class="empty-note">Ничего не нашлось.</p>`;
   renderOrderBlock();
