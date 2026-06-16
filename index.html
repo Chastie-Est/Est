@@ -9,22 +9,6 @@
 html,body{margin:0;padding:0}
 body{font-family:Arial,sans-serif;color:#2A1F1B;background:#FFF8F0}
 
-.fixed-hero{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100vh;
-  z-index:-1;
-}
-.fixed-hero-img{
-  width:100%;height:100%;
-  object-fit:cover;display:block;
-}
-.fixed-hero-overlay{
-  position:absolute;top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.45);
-}
-
 .info-bar{
   position:fixed;top:0;left:0;right:0;
   z-index:110;background:#2A1F1B;
@@ -53,8 +37,19 @@ body{font-family:Arial,sans-serif;color:#2A1F1B;background:#FFF8F0}
   padding:10px 18px;display:flex;
   align-items:center;justify-content:space-between;gap:14px;
 }
-.brand{display:inline-flex;align-items:center;cursor:pointer;text-decoration:none}
-.brand-logo{height:52px;width:auto;border-radius:10px;object-fit:contain;display:block}
+.brand{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:Arial,sans-serif;font-weight:900;font-size:20px;
+  color:#7A2E18;letter-spacing:-0.03em;
+  text-decoration:none;cursor:pointer;
+}
+.brand-mark{
+  width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#FFD8A8,#C65D3B);
+  box-shadow:0 8px 20px rgba(122,46,24,.22);
+  font-size:20px;
+}
 .navbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .navbtn{
   border:1px solid rgba(198,93,59,.25);border-radius:12px;
@@ -82,12 +77,18 @@ body{font-family:Arial,sans-serif;color:#2A1F1B;background:#FFF8F0}
 .btn:disabled{background:#B9B0A8;color:#F6F2EE;cursor:not-allowed;box-shadow:none}
 .btn.secondary{background:#FFF8F0;color:#C65D3B;border:1px solid rgba(198,93,59,.35);box-shadow:0 6px 16px rgba(42,31,27,.08)}
 .btn.secondary:hover{background:#FFF0E2}
-.add-btn{white-space:nowrap;padding:9px 11px;font-size:14px;border-radius:12px}
+.add-btn{white-space:nowrap;padding:9px 14px;font-size:14px;border-radius:12px}
 
+/* ===================== */
+/* ГЛАВНАЯ — ФОН1_BASE64 */
+/* ===================== */
 .hero{
-  position:relative;min-height:100vh;
+  position:relative;
+  min-height:100vh;
   padding:136px 0 56px;
-  background:transparent;
+  background:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    url('ФОН1_BASE64') center/cover no-repeat;
   overflow:hidden;
 }
 
@@ -111,9 +112,9 @@ body{font-family:Arial,sans-serif;color:#2A1F1B;background:#FFF8F0}
 }
 .status.open{background:#2F9E5C}.status.closed{background:#8C8A87}
 
-h1{margin:0 0 14px;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.04em;color:#ffffff}
+h1{margin:0 0 14px;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.04em;color:#fff}
 .hero .slogan{margin:0 0 26px;font-size:20px;font-weight:700;line-height:1.4;color:#FFD8A8;font-style:italic}
-.hero p{margin:0 0 26px;font-size:18px;line-height:1.65;color:#ffffff}
+.hero p{margin:0 0 26px;font-size:18px;line-height:1.65;color:#fff}
 
 .promo-banner{
   border-radius:28px;padding:40px 32px;
@@ -138,16 +139,30 @@ h1{margin:0 0 14px;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacin
 .steps-title{margin:0 0 16px;font-size:16px;font-weight:900;color:#FFD8A8}
 .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .step{
-  background:rgba(255,255,255,0.15);
-  border-radius:16px;padding:16px;
-  text-align:center;font-weight:800;color:#fff;
+  background:rgba(255,255,255,0.15);border-radius:16px;
+  padding:16px;text-align:center;font-weight:800;color:#fff;
 }
 .step-emoji{font-size:32px;line-height:1;margin-bottom:8px}
 
 .page-title{margin:0 0 18px;font-size:34px}
 
-.menu-screen-inner{padding:136px 0 56px;background:#FFF8F0;min-height:100vh}
-.checkout-screen-inner{padding:136px 0 56px;background:#FFF8F0;min-height:100vh}
+/* ===================== */
+/* МЕНЮ — ФОН2_BASE64    */
+/* ===================== */
+.menu-screen-inner{
+  padding:136px 0 56px;
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(255,248,240,0.90),rgba(255,248,240,0.90)),
+    url('ФОН2_BASE64') center/cover no-repeat;
+  background-attachment:fixed;
+}
+
+.checkout-screen-inner{
+  padding:136px 0 56px;
+  background:#FFF8F0;
+  min-height:100vh;
+}
 
 .search-wrap{position:relative;margin-bottom:14px}
 .search{
@@ -173,7 +188,7 @@ h1{margin:0 0 14px;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacin
 
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .chip{
-  border:0;border-radius:999px;padding:9px 12px;
+  border:0;border-radius:999px;padding:9px 14px;
   background:#fff;color:#5A4B43;font-family:Arial,sans-serif;
   font-weight:800;font-size:14px;cursor:pointer;
   box-shadow:0 4px 12px rgba(42,31,27,.07);
@@ -191,9 +206,13 @@ h1{margin:0 0 14px;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacin
 .cat-note-icon{font-size:28px;flex-shrink:0;line-height:1}
 .cat-note strong{color:#C65D3B}
 
-.category{margin-bottom:28px}
-.category h3{margin:0 0 14px;font-size:22px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.category{margin-bottom:32px}
+.category h3{margin:0 0 16px;font-size:24px}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:18px;
+}
 .dish{
   background:#fff;border-radius:22px;
   box-shadow:0 12px 30px rgba(42,31,27,.10);
@@ -201,12 +220,15 @@ h1{margin:0 0 14px;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacin
   cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;
 }
 .dish:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 20px 45px rgba(42,31,27,.17)}
-.dish-plate{height:150px;display:grid;place-items:center;font-size:74px;pointer-events:none}
-.dish-body{padding:14px 16px 16px;display:grid;gap:8px;flex:1;pointer-events:none}
-.dish-name{font-weight:900;font-size:17px;color:#2A1F1B}
-.dish-comp{color:#6B6B6B;font-size:13px;line-height:1.45}
-.dish-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;pointer-events:auto}
-.price{color:#B7791F;font-weight:900;font-size:18px}
+.dish-plate{height:160px;display:grid;place-items:center;font-size:78px;pointer-events:none}
+.dish-body{padding:16px 18px 18px;display:grid;gap:10px;flex:1;pointer-events:none}
+.dish-name{font-weight:900;font-size:18px;color:#2A1F1B}
+.dish-comp{color:#6B6B6B;font-size:14px;line-height:1.5}
+.dish-row{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-top:auto;pointer-events:auto;
+}
+.price{color:#B7791F;font-weight:900;font-size:20px}
 
 .order-block{
   margin-top:40px;padding:24px;background:#fff;
@@ -321,7 +343,6 @@ body.noscroll{overflow:hidden}
 }
 
 @media(max-width:520px){
-  .brand-logo{height:40px}
   .navbtn{padding:9px 10px;font-size:13px}
   .cards{grid-template-columns:1fr}
   .hero p,.hero .slogan{font-size:16px}
@@ -338,15 +359,6 @@ body.noscroll{overflow:hidden}
 </head>
 <body>
 
-<!--
-  ФОНОВАЯ КАРТИНКА — закреплена, не двигается при скролле.
-  Замени ФОН_BASE64 на свою строку data:image/jpeg;base64,...
--->
-<div class="fixed-hero">
-  <img src="ФОН_BASE64" alt="" class="fixed-hero-img">
-  <div class="fixed-hero-overlay"></div>
-</div>
-
 <div class="info-bar">
   <div class="info-bar-inner">
     <a href="https://yandex.ru/maps/-/CPTQiU1w" target="_blank" class="info-link">📍 Наш адрес на карте</a>
@@ -357,11 +369,9 @@ body.noscroll{overflow:hidden}
 
 <header class="topbar">
   <div class="topbar-inner">
-    <!--
-      ЛОГОТИП — замени ЛОГОТИП_BASE64 на свою строку data:image/png;base64,...
-    -->
     <div class="brand" onclick="showScreen('screen-home')">
-      <img src="ЛОГОТИП_BASE64" alt="Счастье-есть" class="brand-logo">
+      <span class="brand-mark" aria-hidden="true">🌿</span>
+      <span>Счастье-есть</span>
     </div>
     <nav class="navbtns">
       <button class="navbtn" type="button" data-screen="screen-home">🏠 Главная</button>
@@ -494,43 +504,43 @@ const menu=[
 {id:"lunch2",name:"Обед «Итальянский»",price:450,emoji:"🍝",color:"linear-gradient(135deg,#FFB5A7,#F3D9FA)",comp:"Капрезе + Минестроне + Пицца Маргарита + Лимонад",history:"Итальянский обед начинается с томатов и моцареллы, продолжается наваристым супом и завершается королевой — пиццей Маргаритой."},
 {id:"lunch3",name:"Обед «Сытный»",price:480,emoji:"🥩",color:"linear-gradient(135deg,#C65D3B,#FFD8A8)",comp:"Греческий салат + Борщ + Куриное филе с пюре + Кофе",history:"Для тех, кто пришёл голодным и хочет уйти счастливым. Греческий салат, борщ, курица с пюре и кофе на десерт."},
 {id:"lunch4",name:"Обед «Лёгкий»",price:420,emoji:"🥗",color:"linear-gradient(135deg,#D8F5A2,#B2F2BB)",comp:"Капрезе + Томатный крем-суп + Паста Песто + Смузи",history:"Лёгкий обед для тех, кто хочет наесться, но не отяжелеть. Свежие томаты, бархатный суп, ароматная паста и ягодный смузи."},
-{id:"lunch5",name:"Обед «Детский»",price:400,emoji:"🧒",color:"linear-gradient(135deg,#F3D9FA,#FFE8A0)",comp:"Куриный суп + Паста Альфредо + Панна-котта + Кола",history:"Собран из блюд, которые нравятся всем: нежный суп, сливочная паста, трясущаяся панна-котта и кола."}
+{id:"lunch5",name:"Обед «Детский»",price:400,emoji:"🧒",color:"linear-gradient(135deg,#F3D9FA,#FFE8A0)",comp:"Куриный суп + Паста Альфредо + Панна-котта + Кола",history:"Собран из блюд, которые нравятся всем: нежный суп, сливочная паста, панна-котта и кола."}
 ]},
 {category:"🍕 Пицца",items:[
-{id:"margherita",name:"Маргарита",price:390,emoji:"🍕",color:"linear-gradient(135deg,#FFD8A8,#FFB085)",comp:"томатный соус, моцарелла, базилик",history:"Маргариту создали в 1889 году в Неаполе в честь королевы Маргариты Савойской. Три ингредиента в цвет итальянского флага."},
-{id:"pepperoni",name:"Пепперони",price:450,emoji:"🍕",color:"linear-gradient(135deg,#FFB5A7,#C65D3B)",comp:"томатный соус, моцарелла, пепперони",history:"Самая популярная пицца в Америке. Американские иммигранты скрестили итальянское тесто с острой салями."},
-{id:"quattro",name:"Четыре сыра",price:490,emoji:"🧀",color:"linear-gradient(135deg,#FFE8A0,#FFD8A8)",comp:"моцарелла, горгонзола, пармезан, рикотта",history:"Итальянский способ доказать, что даже без мяса пицца может быть роскошной. Каждый сыр — свой оттенок вкуса."},
-{id:"hawaiian",name:"Гавайская",price:420,emoji:"🍍",color:"linear-gradient(135deg,#FFE8A0,#FFC078)",comp:"томатный соус, моцарелла, ветчина, ананас",history:"Изобрёл канадец Сэм Панопулос в 1962 году. Итальянцы считают это преступлением, но мир наслаждается."},
-{id:"meat-pizza",name:"Мясная",price:520,emoji:"🥩",color:"linear-gradient(135deg,#C65D3B,#FFB5A7)",comp:"томатный соус, моцарелла, бекон, курица, говядина",history:"Для тех, кто считает, что одного вида мяса недостаточно. Каждый топпинг — аргумент в пользу размера XL."},
-{id:"funghi",name:"Грибная",price:430,emoji:"🍄",color:"linear-gradient(135deg,#D8C0A8,#FFD8A8)",comp:"сливочный соус, моцарелла, шампиньоны, трюфельное масло",history:"Нежная альтернатива классике. Трюфельное масло добавляет аромат леса и дождя."}
+{id:"margherita",name:"Маргарита",price:390,emoji:"🍕",color:"linear-gradient(135deg,#FFD8A8,#FFB085)",comp:"томатный соус, моцарелла, базилик",history:"Создана в 1889 году в Неаполе в честь королевы Маргариты Савойской. Три ингредиента в цвет итальянского флага: красный томат, белая моцарелла и зелёный базилик."},
+{id:"pepperoni",name:"Пепперони",price:450,emoji:"🍕",color:"linear-gradient(135deg,#FFB5A7,#C65D3B)",comp:"томатный соус, моцарелла, пепперони",history:"Самая популярная пицца в Америке. Американские иммигранты скрестили итальянское тесто с острой салями и получили классику пятничных вечеров."},
+{id:"quattro",name:"Четыре сыра",price:490,emoji:"🧀",color:"linear-gradient(135deg,#FFE8A0,#FFD8A8)",comp:"моцарелла, горгонзола, пармезан, рикотта",history:"Итальянский способ доказать, что даже без мяса пицца может быть роскошной. Каждый сыр отвечает за свой оттенок вкуса: сливочный, острый, солёный и нежный."},
+{id:"hawaiian",name:"Гавайская",price:420,emoji:"🍍",color:"linear-gradient(135deg,#FFE8A0,#FFC078)",comp:"томатный соус, моцарелла, ветчина, ананас",history:"Изобрёл канадец Сэм Панопулос в 1962 году. Итальянцы считают это преступлением, но весь остальной мир тихо наслаждается сочетанием сладкого ананаса и солёной ветчины."},
+{id:"meat-pizza",name:"Мясная",price:520,emoji:"🥩",color:"linear-gradient(135deg,#C65D3B,#FFB5A7)",comp:"томатный соус, моцарелла, бекон, курица, говядина, пепперони",history:"Для тех, кто считает, что одного вида мяса недостаточно. Каждый мясной топпинг — аргумент в пользу размера XL."},
+{id:"funghi",name:"Грибная",price:430,emoji:"🍄",color:"linear-gradient(135deg,#D8C0A8,#FFD8A8)",comp:"сливочный соус, моцарелла, шампиньоны, трюфельное масло",history:"Нежная альтернатива классике. Трюфельное масло добавляет аромат леса и дождя, даже если грибы выросли на ферме."}
 ]},
 {category:"🍝 Паста",items:[
-{id:"carbonara",name:"Карбонара",price:390,emoji:"🍝",color:"linear-gradient(135deg,#FFE8A0,#F3D9FA)",comp:"спагетти, гуанчиале, яйцо, пармезан",history:"Родилась в Риме. Главное правило: никаких сливок, только яйцо, сыр и горячая паста."},
-{id:"bolognese",name:"Болоньезе",price:370,emoji:"🍝",color:"linear-gradient(135deg,#FFB5A7,#FFC078)",comp:"тальятелле, говяжий рагу, томаты, пармезан",history:"Из Болоньи. Мясной фарш томится с томатами часами. Подают с тальятелле, не со спагетти."},
-{id:"pesto",name:"Песто",price:360,emoji:"🌿",color:"linear-gradient(135deg,#D8F5A2,#B2F2BB)",comp:"спагетти, базилик, кедровые орехи, пармезан",history:"Придумали в Генуе. Классический рецепт запрещает блендер — только мраморная ступка."},
-{id:"alfredo",name:"Альфредо",price:380,emoji:"🧈",color:"linear-gradient(135deg,#FFE8A0,#FFD8A8)",comp:"феттучини, масло, пармезан, сливки",history:"Альфредо ди Лелио придумал эту пасту в 1914 году для беременной жены. Три ингредиента покорили Голливуд."}
+{id:"carbonara",name:"Карбонара",price:390,emoji:"🍝",color:"linear-gradient(135deg,#FFE8A0,#F3D9FA)",comp:"спагетти, гуанчиале, яйцо, пармезан, перец",history:"Родилась в Риме в середине XX века. Главное правило: никаких сливок, только яйцо, сыр и горячая паста."},
+{id:"bolognese",name:"Болоньезе",price:370,emoji:"🍝",color:"linear-gradient(135deg,#FFB5A7,#FFC078)",comp:"тальятелле, говяжий рагу, томаты, пармезан",history:"Из Болоньи. Мясной фарш томится с томатами, вином и овощами часами. Подают с тальятелле, не со спагетти — это принципиально."},
+{id:"pesto",name:"Песто",price:360,emoji:"🌿",color:"linear-gradient(135deg,#D8F5A2,#B2F2BB)",comp:"спагетти, базилик, кедровые орехи, пармезан, чеснок",history:"Придумали в Генуе, где базилик растёт на каждом балконе. Классический рецепт запрещает блендер — только мраморная ступка."},
+{id:"alfredo",name:"Альфредо",price:380,emoji:"🧈",color:"linear-gradient(135deg,#FFE8A0,#FFD8A8)",comp:"феттучини, сливочное масло, пармезан, сливки",history:"Альфредо ди Лелио придумал эту пасту в 1914 году для беременной жены. Три ингредиента — масло, сыр и паста — покорили Голливуд."}
 ]},
 {category:"🥗 Салаты",items:[
-{id:"caesar",name:"Цезарь с курицей",price:350,emoji:"🥗",color:"linear-gradient(135deg,#D8F5A2,#FFF8F0)",comp:"курица, пармезан, айсберг, соус, гренки",history:"Придумал Цезарь Кардини в 1924 году в Тихуане, когда продуктов осталось меньше, чем гостей."},
-{id:"greek",name:"Греческий",price:320,emoji:"🥗",color:"linear-gradient(135deg,#B2F2BB,#D8F5A2)",comp:"томаты, огурцы, перец, фета, маслины",history:"Деревенский «хориатики», который подавали под солнцем. Овощи крупно, фету сверху."},
-{id:"caprese",name:"Капрезе",price:340,emoji:"🍅",color:"linear-gradient(135deg,#FFB5A7,#FFD8A8)",comp:"томаты, моцарелла, базилик, оливковое масло",history:"Салат с острова Капри. Собирается за минуту, но только если продукты идеальные."}
+{id:"caesar",name:"Цезарь с курицей",price:350,emoji:"🥗",color:"linear-gradient(135deg,#D8F5A2,#FFF8F0)",comp:"курица, пармезан, айсберг, соус, гренки",history:"Придумал Цезарь Кардини в 1924 году в Тихуане, когда продуктов осталось меньше, чем гостей. Собрал шедевр из остатков."},
+{id:"greek",name:"Греческий",price:320,emoji:"🥗",color:"linear-gradient(135deg,#B2F2BB,#D8F5A2)",comp:"томаты, огурцы, перец, фета, маслины",history:"Деревенский «хориатики», который подавали под солнцем. Овощи крупно, фету сверху, масла не жалеть."},
+{id:"caprese",name:"Капрезе",price:340,emoji:"🍅",color:"linear-gradient(135deg,#FFB5A7,#FFD8A8)",comp:"томаты, моцарелла, базилик, оливковое масло",history:"Салат с острова Капри. Собирается за минуту: нарезал томат, положил моцареллу, бросил базилик. Просто, но только если продукты идеальные."}
 ]},
 {category:"🍲 Супы",items:[
-{id:"minestrone",name:"Минестроне",price:290,emoji:"🍲",color:"linear-gradient(135deg,#D8F5A2,#FFE8A0)",comp:"овощи, фасоль, паста, томаты",history:"Итальянский суп из всего, что нашлось в огороде. Каждая бабушка варит свой, и каждый правильный."},
+{id:"minestrone",name:"Минестроне",price:290,emoji:"🍲",color:"linear-gradient(135deg,#D8F5A2,#FFE8A0)",comp:"овощи, фасоль, паста, томаты, базилик",history:"Итальянский суп из всего, что нашлось в огороде. У него нет единого рецепта, каждая бабушка варит свой, и каждый правильный."},
 {id:"tomato-soup",name:"Томатный крем-суп",price:270,emoji:"🍅",color:"linear-gradient(135deg,#FFB5A7,#C65D3B)",comp:"томаты, сливки, базилик, чеснок",history:"Стал символом комфорта после Энди Уорхола. На самом деле его варили в Испании задолго до поп-арта."},
-{id:"chicken-soup",name:"Куриный с лапшой",price:260,emoji:"🍜",color:"linear-gradient(135deg,#FFE8A0,#FFD8A8)",comp:"курица, лапша, морковь, зелень",history:"Универсальная домашняя аптечка. Варили при простуде, после дороги и когда хотелось заботы."}
+{id:"chicken-soup",name:"Куриный с лапшой",price:260,emoji:"🍜",color:"linear-gradient(135deg,#FFE8A0,#FFD8A8)",comp:"курица, лапша, морковь, зелень",history:"Универсальная домашняя аптечка. Варили при простуде, после дороги и когда хотелось почувствовать заботу."}
 ]},
 {category:"🍰 Десерты",items:[
-{id:"tiramisu",name:"Тирамису",price:340,emoji:"🍮",color:"linear-gradient(135deg,#FFD8A0,#F3D9FA)",comp:"маскарпоне, кофе, савоярди, какао",history:"«Взбодри меня» по-итальянски. Печенье в эспрессо, слои крема, какао сверху. Не размочи савоярди."},
-{id:"panna-cotta",name:"Панна-котта",price:280,emoji:"🍮",color:"linear-gradient(135deg,#FFF8F0,#FFD8A8)",comp:"сливки, ваниль, ягодный соус",history:"Из Пьемонта. Дрожит на ложке. Если не качается — слишком много желатина."},
-{id:"cheesecake",name:"Чизкейк",price:300,emoji:"🍰",color:"linear-gradient(135deg,#F3D9FA,#FFB5A7)",comp:"сливочный сыр, песочная основа, ягоды",history:"Предки чизкейка были в древней Греции. Нью-йоркский вариант — плотный, гладкий, чуть холодный."},
-{id:"fondant",name:"Шоколадный фондан",price:320,emoji:"🍫",color:"linear-gradient(135deg,#C65D3B,#FFB5A7)",comp:"шоколад, масло, яйцо, мука",history:"Пирог с жидким сердцем. Снаружи корочка, внутри лава, рядом мороженое. Едят медленно."}
+{id:"tiramisu",name:"Тирамису",price:340,emoji:"🍮",color:"linear-gradient(135deg,#FFD8A0,#F3D9FA)",comp:"маскарпоне, кофе, савоярди, какао",history:"«Взбодри меня» по-итальянски. Печенье окунают в эспрессо, слои крема, какао сверху. Главное — не размочить савоярди."},
+{id:"panna-cotta",name:"Панна-котта",price:280,emoji:"🍮",color:"linear-gradient(135deg,#FFF8F0,#FFD8A8)",comp:"сливки, ваниль, ягодный соус",history:"Из Пьемонта — десерт, который дрожит на ложке. Сливки, сахар, ваниль и капля желатина. Если не качается — слишком много желатина."},
+{id:"cheesecake",name:"Чизкейк",price:300,emoji:"🍰",color:"linear-gradient(135deg,#F3D9FA,#FFB5A7)",comp:"сливочный сыр, песочная основа, ягодный соус",history:"Предки чизкейка были в древней Греции. Нью-йоркский вариант — плотный, гладкий и чуть холодный — стал золотым стандартом."},
+{id:"fondant",name:"Шоколадный фондан",price:320,emoji:"🍫",color:"linear-gradient(135deg,#C65D3B,#FFB5A7)",comp:"шоколад, масло, яйцо, мука, ваниль",history:"Пирог с жидким шоколадным сердцем. Снаружи корочка, внутри лава, рядом мороженое. Контраст, ради которого едят медленно."}
 ]},
 {category:"🥤 Напитки",items:[
-{id:"coffee",name:"Кофе",price:150,emoji:"☕",color:"linear-gradient(135deg,#D8C0A8,#8A5A3A)",comp:"латте / капучино / американо",history:"Открыл эфиопский пастух Калди. С тех пор напиток стал поводом встретиться или подержать тёплую чашку."},
-{id:"tea",name:"Чай",price:120,emoji:"🍵",color:"linear-gradient(135deg,#D8F5A2,#B2F2BB)",comp:"чёрный / зелёный / травяной",history:"Ритуал: самовар, варенье и долгий разговор. Наша версия — мята, лимон и мёд."},
-{id:"lemonade",name:"Лимонад",price:180,emoji:"🍋",color:"linear-gradient(135deg,#FFE8A0,#D8F5A2)",comp:"лимон, мята, имбирь",history:"Сироп с водой из Европы. Мы добавляем имбирь: кислинка, мята, лёгкая горчинка."},
-{id:"smoothie",name:"Смузи",price:250,emoji:"🥤",color:"linear-gradient(135deg,#F3D9FA,#FFB5A7)",comp:"банан, ягоды, йогурт, мёд",history:"Из Калифорнии. Банан — бархат, ягоды — цвет, йогурт — польза."},
+{id:"coffee",name:"Кофе",price:150,emoji:"☕",color:"linear-gradient(135deg,#D8C0A8,#8A5A3A)",comp:"латте / капучино / американо",history:"Открыл эфиопский пастух Калди, заметив бодрость коз после ягод странного куста. С тех пор напиток стал поводом встретиться."},
+{id:"tea",name:"Чай",price:120,emoji:"🍵",color:"linear-gradient(135deg,#D8F5A2,#B2F2BB)",comp:"чёрный / зелёный / травяной",history:"Ритуал: самовар, варенье, толстая кружка и долгий разговор. Наша версия — мята, лимон и мёд."},
+{id:"lemonade",name:"Лимонад",price:180,emoji:"🍋",color:"linear-gradient(135deg,#FFE8A0,#D8F5A2)",comp:"лимон, мята, имбирь",history:"Сироп с водой из Европы. Мы добавляем имбирь: сначала кислинка, потом мята, в конце — лёгкая горчинка."},
+{id:"smoothie",name:"Смузи",price:250,emoji:"🥤",color:"linear-gradient(135deg,#F3D9FA,#FFB5A7)",comp:"банан, ягоды, йогурт, мёд",history:"Из Калифорнии — способ собрать всё вкусное в блендере. Банан даёт бархат, ягоды — цвет, йогурт — пользу."},
 {id:"cola",name:"Кола",price:130,emoji:"🥤",color:"linear-gradient(135deg,#8A5A3A,#2A1F1B)",comp:"классическая / без сахара",history:"Фармацевт Пембертон, 1886 год. Хотел лекарство от головной боли. Не вышло, но мир без неё уже не может."}
 ]}
 ];
@@ -607,7 +617,7 @@ function itemCard(it){
       <div class="dish-comp">${escapeHtml(it.comp)}</div>
       <div class="dish-row">
         <div class="price">${money(it.price)}</div>
-        <button class="btn add-btn" type="button" data-id="${it.id}">➕</button>
+        <button class="btn add-btn" type="button" data-id="${it.id}">➕ В корзину</button>
       </div>
     </div>
   </article>`;
